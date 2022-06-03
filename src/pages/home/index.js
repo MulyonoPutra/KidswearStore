@@ -1,36 +1,24 @@
-import axios from 'axios';
 import { ErrorToast, Loading } from 'components';
+import { findAllProducts } from 'config/redux/action/product.action';
 import ProductList from 'pages/product-list';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './home.scss';
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // @ts-ignore
+  const listProducts = useSelector((state) => state.productList);
+  const { loading, error, products } = listProducts;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetch = async () => {
-      setLoading(true);
-      await axios
-        .get('v1/product')
-        .then((response) => {
-          setProducts(response.data);
-          console.log(response.data);
-        })
-        .catch((error) => {
-          setError(error);
-          setLoading(false);
-        });
-      setLoading(false);
-    };
-    fetch();
-  }, []);
+    // @ts-ignore
+    dispatch(findAllProducts());
+  }, [dispatch]);
 
   return (
     <>
-      {
-      loading ? (
+      {loading ? (
         <Loading />
       ) : error ? (
         <ErrorToast />
