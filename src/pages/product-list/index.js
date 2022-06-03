@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 const ProductList = (props) => {
-  const { id, imageSrc, imageAlt, name, price, href, color } = props;
+  const { id, image, name, price, href, color } = props;
   const navigate = useNavigate();
 
   return (
@@ -10,8 +10,8 @@ const ProductList = (props) => {
     }}>
       <div className='w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none'>
         <img
-          src={imageSrc}
-          alt={imageAlt}
+          src={image}
+          alt={name}
           className='w-full h-full object-center object-cover lg:w-full lg:h-full'
         />
       </div>

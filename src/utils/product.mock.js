@@ -1,43 +1,59 @@
 export const products = [
   {
     id: 1,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc:
+    name: 'Nike Slim Shirt',
+    slug: 'Nike Slim Shirt',
+    category: 'Shirt',
+    image:
       'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: '120000',
+    countInStock: 20,
+    brand: 'Nike',
+    rating: 5,
+    numReviews: 10,
+    description: 'High Quality Shirt',
   },
   {
     id: 2,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc:
+    name: 'Nike Slim Shirt',
+    slug: 'Nike Slim Shirt',
+    category: 'Shirt',
+    image:
       'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: '120000',
+    countInStock: 20,
+    brand: 'Nike',
+    rating: 5,
+    numReviews: 10,
+    description: 'High Quality Shirt',
   },
   {
     id: 3,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc:
+    name: 'Nike Slim Shirt',
+    slug: 'Nike Slim Shirt',
+    category: 'Shirt',
+    image:
       'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: '120000',
+    countInStock: 20,
+    brand: 'Nike',
+    rating: 5,
+    numReviews: 10,
+    description: 'High Quality Shirt',
   },
   {
     id: 4,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc:
+    name: 'Nike Slim Shirt',
+    slug: 'Nike Slim Shirt',
+    category: 'Shirt',
+    image:
       'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
+    price: '120000',
+    countInStock: 20,
+    brand: 'Nike',
+    rating: 5,
+    numReviews: 10,
+    description: 'High Quality Shirt',
   },
   // More products...
 ];

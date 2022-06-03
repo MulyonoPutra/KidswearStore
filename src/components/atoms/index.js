@@ -1,4 +1,6 @@
 import DropdownMenu from './dropdown-menu';
 import MoreMenu from './more-menu';
+import Loading from './loading';
+import ErrorToast from './error-toast';
 
-export { DropdownMenu, MoreMenu };
+export { DropdownMenu, MoreMenu, Loading, ErrorToast };
