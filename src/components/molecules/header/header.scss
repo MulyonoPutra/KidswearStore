@@ -1,0 +1,15 @@
+.popover-panel {
+    @apply absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2;
+}
+
+.sign-up-btn {
+    @apply w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700;
+}
+
+.popover-btn {
+    @apply bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500;
+}
+
+.borders {
+    @apply flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10;
+}
