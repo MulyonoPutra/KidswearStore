@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Main from './../../pages/main/index'
+import Main from './../../pages/main/index';
 
 const AppRoute = () => {
   return (
     <Router>
-        <Routes>
+      <Routes>
         <Route path='*' element={<Main />} />
-        </Routes>
+      </Routes>
     </Router>
-  )
-}
-export default AppRoute
+  );
+};
+export default AppRoute;
