@@ -1,12 +1,14 @@
-
-import ProductList from 'pages/product-list';
 import { Header } from '../../components/molecules/index';
+import { Route, Routes } from 'react-router-dom';
+import Home from 'pages/home';
 
 const Main = () => {
   return (
     <>
       <Header />
-      <ProductList/>
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
     </>
   );
 };
