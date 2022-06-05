@@ -29,6 +29,7 @@ const Home = () => {
               {products.map((product) => (
                 <div key={product.id}>
                   <ProductList
+                    id={product.id}
                     image={product.image}
                     imageAlt={product.name}
                     name={product.name}

@@ -1,8 +1,16 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './product-list.scss'
 
 const ProductList = (props) => {
   const { id, image, name, price, href, color } = props;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(id);
+  })
+
+  
 
   return (
     <div className='group relative' onClick={() => {
