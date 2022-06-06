@@ -1,0 +1,32 @@
+.images {
+  @apply lg:w-1/2 w-full object-cover object-center rounded border border-gray-200;
+}
+
+.cart-button {
+  @apply flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded w-full text-center justify-center;
+}
+
+.text {
+  &-price {
+    @apply text-2xl text-gray-900 font-bold;
+  }
+}
+
+section {
+  @apply text-gray-700 overflow-hidden bg-white;
+}
+
+.card {
+  width: 500px;
+  @apply block p-6 rounded-lg shadow-lg bg-white max-w-sm;
+}
+
+.count {
+  &-plus {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-l-0 w-7 h-10 flex items-center justify-center pb-1 rounded-r-lg;
+  }
+
+  &-minus {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-r-0 w-7 h-10 flex items-center justify-center pb-1 rounded-l-lg;
+  }
+}
