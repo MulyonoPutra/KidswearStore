@@ -1,4 +1,4 @@
-import { ErrorToast, Loading, Divider } from 'components';
+import { ErrorToast, Loading, Divider, Rating } from 'components';
 import { findById } from 'config/redux/action/product.action';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   const [count, setCount] = useState(0);
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(true);
 
   const addCount = () => {
     setCount((prev) => prev + 1);
@@ -63,69 +63,15 @@ const ProductDetails = () => {
                     <h5 className='text-gray-900 text-xl leading-tight font-medium mb-2'>
                       {product.name}
                     </h5>
+
                     <div className='flex mb-4'>
-                      <span className='flex items-center'>
-                        <svg
-                          fill='currentColor'
-                          stroke='currentColor'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          className='w-4 h-4 text-red-500'
-                          viewBox='0 0 24 24'
-                        >
-                          <path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' />
-                        </svg>
-                        <svg
-                          fill='currentColor'
-                          stroke='currentColor'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          className='w-4 h-4 text-red-500'
-                          viewBox='0 0 24 24'
-                        >
-                          <path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' />
-                        </svg>
-                        <svg
-                          fill='currentColor'
-                          stroke='currentColor'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          className='w-4 h-4 text-red-500'
-                          viewBox='0 0 24 24'
-                        >
-                          <path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' />
-                        </svg>
-                        <svg
-                          fill='currentColor'
-                          stroke='currentColor'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          className='w-4 h-4 text-red-500'
-                          viewBox='0 0 24 24'
-                        >
-                          <path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' />
-                        </svg>
-                        <svg
-                          fill='none'
-                          stroke='currentColor'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          className='w-4 h-4 text-red-500'
-                          viewBox='0 0 24 24'
-                        >
-                          <path d='M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z' />
-                        </svg>
-                        <span className='text-gray-600 ml-3'>
-                          {product.numReviews} Reviews
-                        </span>
-                      </span>
+                      <Rating
+                        rating={product.rating}
+                        numReviews={product.numReviews}
+                        className='flex items-center'
+                      ></Rating>
                       <span className='flex ml-3 pl-3 py-2 border-l-2 border-gray-200'>
-                        <a className='text-gray-500'>
+                        <a href='!#' className='text-gray-500'>
                           <svg
                             fill='currentColor'
                             strokeLinecap='round'
@@ -137,7 +83,7 @@ const ProductDetails = () => {
                             <path d='M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' />
                           </svg>
                         </a>
-                        <a className='ml-2 text-gray-500'>
+                        <a href='!#' className='ml-2 text-gray-500'>
                           <svg
                             fill='currentColor'
                             strokeLinecap='round'
@@ -149,7 +95,7 @@ const ProductDetails = () => {
                             <path d='M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z' />
                           </svg>
                         </a>
-                        <a className='ml-2 text-gray-500'>
+                        <a href='!#' className='ml-2 text-gray-500'>
                           <svg
                             fill='currentColor'
                             strokeLinecap='round'
@@ -254,13 +200,13 @@ const ProductDetails = () => {
                         />
                       </div>
                       <div>
-                        <p className='leading-relaxed text-green-600'>
+                        <p className='leading-relaxed text-green-600 text-sm mb-2'>
                           Add Notes
                         </p>
                       </div>
                     </div>
-                      {
-                        !isHidden && (<div className='mb-4'>
+                    {!isHidden && (
+                      <div className='mb-4'>
                         <textarea
                           id='about'
                           name='about'
@@ -269,9 +215,9 @@ const ProductDetails = () => {
                           placeholder='Add your notes here..'
                           defaultValue={''}
                         />
-                      </div>)
-                      }
-                    
+                      </div>
+                    )}
+
                     <div>
                       <button
                         className='cart-button'

@@ -3,5 +3,6 @@ import MoreMenu from './more-menu';
 import Loading from './loading';
 import ErrorToast from './error-toast';
 import Divider from './divider';
+import Rating from './rating';
 
-export { DropdownMenu, MoreMenu, Loading, ErrorToast, Divider };
+export { DropdownMenu, MoreMenu, Loading, ErrorToast, Divider, Rating };

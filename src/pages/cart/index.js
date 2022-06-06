@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import './cart.scss'
 
 const Cart = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className='container mx-auto mt-10 px-10'>
@@ -74,8 +76,6 @@ const Cart = () => {
             </div>
             <div className='flex items-center hover:bg-gray-100 -mx-8 px-6 py-5'>
               <div className='flex w-2/5'>
-                {' '}
-                {/* product */}
                 <div className='w-20'>
                   <img
                     className='h-24'
@@ -122,8 +122,6 @@ const Cart = () => {
             </div>
             <div className='flex items-center hover:bg-gray-100 -mx-8 px-6 py-5'>
               <div className='flex w-2/5'>
-                {' '}
-                {/* product */}
                 <div className='w-20'>
                   <img
                     className='h-24'
@@ -168,10 +166,7 @@ const Cart = () => {
                 $150.00
               </span>
             </div>
-            <a
-              href='!#'
-              className='flex font-semibold text-indigo-600 text-sm mt-10'
-            >
+            <button className='flex font-semibold text-indigo-600 text-sm mt-10' onClick={() => navigate(-1)}>
               <svg
                 className='fill-current mr-2 text-indigo-600 w-4'
                 viewBox='0 0 448 512'
@@ -179,7 +174,7 @@ const Cart = () => {
                 <path d='M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z' />
               </svg>
               Continue Shopping
-            </a>
+            </button>
           </div>
           
           <div id='summary' className='w-1/4 px-8 py-10'>
