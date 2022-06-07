@@ -34,7 +34,7 @@ const Header = () => {
           <Popover.Group as='nav' className='hidden md:flex space-x-10'>
             {/*   <DropdownMenu/> */}
 
-            <Link to='/shipping' className='link'> Pricing </Link>
+            <Link to='/checkout' className='link'> Checkout </Link>
             <Link to='/shipping' className='link'> Docs </Link>
 
             {/* <MoreMenu/> */}
