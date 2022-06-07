@@ -1,11 +1,19 @@
-import { useNavigate } from 'react-router-dom';
-import './cart.scss'
+import './cart.scss';
+import { useLocation } from 'react-router-dom';
 
 const Cart = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleClick = () => {
+    console.log(location);
+  };
+
   return (
-    <>
-      <div className='container mx-auto mt-10 px-10'>
+    <div>
+      <button onClick={handleClick}>Log location</button>
+    </div>
+  );
+  /* <div className='container mx-auto mt-10 px-10'>
         <div className='flex shadow-md my-10'>
           <div className='w-3/4 bg-white px-10 py-10'>
             <div className='flex justify-between border-b pb-8'>
@@ -28,8 +36,6 @@ const Cart = () => {
             </div>
             <div className='flex items-center hover:bg-gray-100 -mx-8 px-6 py-5'>
               <div className='flex w-2/5'>
-                {' '}
-                {/* product */}
                 <div className='w-20'>
                   <img
                     className='h-24'
@@ -196,7 +202,7 @@ const Cart = () => {
             <div className='py-10'>
               <label
                 htmlFor='promo'
-                className='font-semibold inline-block mb-3 text-sm uppercase'
+                className='text-promo'
               >
                 Promo Code
               </label>
@@ -207,22 +213,20 @@ const Cart = () => {
                 className='p-2 text-sm w-full'
               />
             </div>
-            <button className='bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase'>
+            <button className='btn-apply'>
               Apply
             </button>
             <div className='border-t mt-8'>
-              <div className='flex font-semibold justify-between py-6 text-sm uppercase'>
+              <div className='text-total-cost'>
                 <span>Total cost</span>
                 <span>$600</span>
               </div>
-              <button className='bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full'>
+              <button className='btn-checkout' onClick={() => navigate('/checkout')}>
                 Checkout
               </button>
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
+      </div> */
 };
 export default Cart;

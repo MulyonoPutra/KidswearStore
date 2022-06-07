@@ -1,3 +1,26 @@
 #summary {
     background-color: #f6f6f6;
 }
+
+.checkout-btn {
+    @apply bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full;
+}
+
+.btn {
+    &-checkout {
+        @apply bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full;
+    }
+    &-apply {
+        @apply bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase;
+    }
+}
+
+.text {
+    &-total-cost {
+        @apply flex font-semibold justify-between py-6 text-sm uppercase;
+    }
+
+    &-promo {
+        @apply font-semibold inline-block mb-3 text-sm uppercase
+    }
+}

@@ -11,26 +11,23 @@ import PencilIcon from 'assets/icons/pencil.svg';
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  // @ts-ignore
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   const navigate = useNavigate();
-
-  const [count, setCount] = useState(0);
+  const [qty, setQty] = useState(1);
   const [isHidden, setIsHidden] = useState(true);
 
   const addCount = () => {
-    setCount((prev) => prev + 1);
+    setQty((prev) => prev + 1);
   };
 
   const minusCount = () => {
-    if (count > 0) {
-      setCount((prev) => prev - 1);
+    if (qty > 0) {
+      setQty((prev) => prev - 1);
     }
   };
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(findById(id));
   }, [dispatch, id]);
 
@@ -40,6 +37,27 @@ const ProductDetails = () => {
     } else {
       return <span className='leading-relaxed text-red-600'>Out of Stock</span>;
     }
+  };
+
+  const addToCartHandler = () => {
+    navigate(
+      {
+        pathname: `/cart/${id}`,
+        search: `?qty=${qty}`,
+      },
+      {
+        state: {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          countInStock: product.countInStock,
+          image: product.image,
+          rating: product.rating,
+          numReviews: product.numReviews,
+          description: product.description,
+        },
+      }
+    );
   };
 
   return (
@@ -170,8 +188,11 @@ const ProductDetails = () => {
                               aria-label='input'
                               className='border border-gray-300 text-center w-14 pb-1 h-10'
                               type='text'
-                              value={count}
-                              onChange={(e) => e.target.value}
+                              value={qty}
+                              onChange={(e) => {
+                                // @ts-ignore
+                                setQty(e.target.value);
+                              }}
                             />
                             <span onClick={addCount} className='count-plus'>
                               <img
@@ -217,15 +238,16 @@ const ProductDetails = () => {
                         />
                       </div>
                     )}
-
-                    <div>
-                      <button
-                        className='cart-button'
-                        onClick={() => navigate('/cart')}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
+                    {product.countInStock > 0 && (
+                      <div>
+                        <button
+                          className='cart-button'
+                          onClick={addToCartHandler}
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
