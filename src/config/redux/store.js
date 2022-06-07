@@ -3,6 +3,14 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from './reducer/reducer';
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+const initialState = {
+    cart: {
+      cartItems: localStorage.getItem('cartItems')
+        ? JSON.parse(localStorage.getItem('cartItems'))
+        : [],
+    },
+  };
+
+const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;

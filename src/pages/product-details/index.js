@@ -7,10 +7,11 @@ import './product-details.scss';
 import MinusIcon from 'assets/icons/minus.svg';
 import PlusIcon from 'assets/icons/plus.svg';
 import PencilIcon from 'assets/icons/pencil.svg';
+import NumberFormat from 'react-number-format';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id: productId } = useParams();
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   const navigate = useNavigate();
@@ -28,8 +29,8 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    dispatch(findById(id));
-  }, [dispatch, id]);
+    dispatch(findById(productId));
+  }, [dispatch, productId]);
 
   const quantityStock = () => {
     if (product.countInStock > 0) {
@@ -40,24 +41,7 @@ const ProductDetails = () => {
   };
 
   const addToCartHandler = () => {
-    navigate(
-      {
-        pathname: `/cart/${id}`,
-        search: `?qty=${qty}`,
-      },
-      {
-        state: {
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          countInStock: product.countInStock,
-          image: product.image,
-          rating: product.rating,
-          numReviews: product.numReviews,
-          description: product.description,
-        },
-      }
-    );
+    navigate(`/cart/${productId}?qty=${qty}`);
   };
 
   return (
@@ -134,7 +118,14 @@ const ProductDetails = () => {
                     <p className='leading-relaxed text-green-600'>
                       {quantityStock()}
                     </p>
-                    <span className='text-price'>Rp. {product.price}</span>
+                    <span className='text-price'>
+                      <NumberFormat
+                        value={product.price}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        prefix={'Rp. '}
+                      />
+                    </span>
                     <Divider />
                     <div className='flex items-center mt-2'>
                       <div className='flex'>

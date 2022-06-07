@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './product-list.scss';
+import NumberFormat from 'react-number-format';
 
 const ProductList = (props) => {
   const { id, image, name, price, href, color } = props;
@@ -29,7 +30,14 @@ const ProductList = (props) => {
           </h3>
           <p className='mt-1 text-sm text-gray-500'>{color}</p>
         </div>
-        <p className='text-sm font-medium text-gray-900'>{price}</p>
+        <p className='text-sm font-medium text-gray-900'>
+          <NumberFormat
+            value={price}
+            displayType={'text'}
+            thousandSeparator={true}
+            prefix={'Rp. '}
+          />
+        </p>
       </div>
     </div>
   );

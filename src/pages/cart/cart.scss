@@ -13,6 +13,10 @@
     &-apply {
         @apply bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase;
     }
+
+    &-remove {
+        @apply font-semibold hover:text-red-500 text-gray-500 text-xs;
+    }
 }
 
 .text {
@@ -22,5 +26,13 @@
 
     &-promo {
         @apply font-semibold inline-block mb-3 text-sm uppercase
+    }
+
+    &-row-label {
+        @apply font-semibold text-center text-gray-600 text-xs uppercase w-1/5;
+    }
+
+    &-product-details {
+        @apply font-semibold text-gray-600 text-xs uppercase w-2/5
     }
 }

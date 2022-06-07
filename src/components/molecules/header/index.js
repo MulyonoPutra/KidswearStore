@@ -4,6 +4,9 @@ import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { solutions, resources } from 'utils/header.collection';
 import './header.scss';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import KidsLogo from 'assets/images/kids.png';
+
 /* import { DropdownMenu, MoreMenu } from 'components'; */
 
 export const classNames = (...classes) => {
@@ -11,6 +14,8 @@ export const classNames = (...classes) => {
 };
 
 const Header = () => {
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
   return (
     <Popover className='relative bg-white'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6'>
@@ -19,9 +24,10 @@ const Header = () => {
             <Link to='/'>
               <span className='sr-only'>Workflow</span>
               <img
-                className='h-8 w-auto sm:h-10'
-                src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
-                alt=''
+                className='h-8 w-auto sm:h-10 logo'
+                src={KidsLogo}
+                alt='Logo'
+               
               />
             </Link>
           </div>
@@ -34,14 +40,43 @@ const Header = () => {
           <Popover.Group as='nav' className='hidden md:flex space-x-10'>
             {/*   <DropdownMenu/> */}
 
-            <Link to='/checkout' className='link'> Checkout </Link>
-            <Link to='/shipping' className='link'> Docs </Link>
+            <Link to='/checkout' className='link'>
+              Checkout
+            </Link>
+            <Link to='/shipping' className='link'>
+              Docs
+            </Link>
 
             {/* <MoreMenu/> */}
           </Popover.Group>
           <div className='wrapper-btn'>
-            <Link to='/shipping' className='signin'> Sign in </Link>
-            <Link to='/shipping' className='signup'> Sign up </Link>
+            <Link to='/cart' className='signin mr-3'>
+              <button className='cart-btn' aria-label='Cart'>
+                <svg
+                  className='h-6 w-6'
+                  fill='none'
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  viewBox='0 0 24 24'
+                  stroke='currentColor'
+                >
+                  <path d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'></path>
+                </svg>
+                <span className='absolute inset-0 object-right-top -mr-6'>
+                  
+                  <div className='cart-badge'>
+                  {cartItems.length}
+                  </div>
+                </span>
+              </button>
+            </Link>
+            <Link to='/shipping' className='signin'>
+              Sign in
+            </Link>
+            <Link to='/shipping' className='signup'>
+              Sign up
+            </Link>
           </div>
         </div>
       </div>
@@ -124,7 +159,7 @@ const Header = () => {
               <div>
                 <button className='sign-up-btn'>Sign up</button>
                 <p className='mt-6 text-center text-base font-medium text-gray-500'>
-                  Existing customer?{' '}
+                  Existing customer?
                   <button className='text-indigo-600 hover:text-indigo-500'>
                     Sign in
                   </button>
@@ -139,5 +174,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
