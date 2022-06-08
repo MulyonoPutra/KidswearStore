@@ -2,7 +2,10 @@ import './cart.scss';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addToCart } from './../../config/redux/action/cart.action';
+import {
+  addToCart,
+  removeFromCart,
+} from './../../config/redux/action/cart.action';
 import { useSelector } from 'react-redux';
 import NumberFormat from 'react-number-format';
 
@@ -28,40 +31,37 @@ const Cart = () => {
 
   const totalPrice = () => {
     return cartItems.reduce((total, item) => total + item.price * item.qty, 0);
-  }
+  };
 
   const totalItems = () => {
     return cartItems.reduce((a, c) => a + c.qty, 0);
-  }
-  
+  };
+
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
+
   return (
     <>
       <div className='container mx-auto mt-10 px-10'>
         <div className='flex shadow-md my-10'>
           <div className='w-3/4 bg-white px-10 py-10'>
             <div className='flex justify-between border-b pb-8'>
-              <h1 className='font-semibold text-2xl'>Shopping Cart</h1>
-              <h2 className='font-semibold text-2xl'>
+              <h1 className='text-title'>Shopping Cart</h1>
+              <h2 className='text-title'>
                 {cartItems.length} Items
               </h2>
             </div>
             <div className='flex mt-10 mb-5'>
-              <h3 className='text-product-details'>
-                Product Details
-              </h3>
-              <h3 className='text-row-label'>
-                Quantity
-              </h3>
-              <h3 className='text-row-label'>
-                Price
-              </h3>
-              <h3 className='text-row-label'>
-                Total
-              </h3>
+              <h3 className='text-product-details'>Product Details</h3>
+              <h3 className='text-row-label'>Quantity</h3>
+              <h3 className='text-row-label'>Price</h3>
+              <h3 className='text-row-label'>Total</h3>
             </div>
             {cartItems.map((item) => (
-              <div className='flex items-center hover:bg-gray-100 -mx-8 px-6 py-5'>
-                <div className='flex w-2/5'>
+              <div className='card-order-summary'>
+                <li className='flex w-2/5' key={item.id}>
                   <div className='w-20'>
                     <img className='h-24' src={item.image} alt={item.name} />
                   </div>
@@ -70,43 +70,49 @@ const Cart = () => {
                     <span className='text-red-500 text-xs'>{item.name}</span>
                     <a
                       href='!#'
-                      className='font-semibold hover:text-red-500 text-gray-500 text-xs'
+                      className='text-remove'
+                      onClick={() => removeFromCartHandler(item.product)}
                     >
                       Remove
                     </a>
                   </div>
-                </div>
-                <div className='flex justify-center w-1/5'>
-                  <svg
-                    className='fill-current text-gray-600 w-3'
-                    viewBox='0 0 448 512'
-                  >
-                    <path d='M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z' />
-                  </svg>
-                  <input
-                    className='mx-2 border text-center w-10'
-                    type='text'
-                    defaultValue={item.qty}
-                  />
-                  <svg
-                    className='fill-current text-gray-600 w-3'
-                    viewBox='0 0 448 512'
-                  >
-                    <path d='M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z' />
-                  </svg>
-                </div>
+                </li>
+                <select
+                      value={item.qty}
+                      onChange={(e) =>
+                        dispatch(
+                          addToCart(item.product, Number(e.target.value))
+                        )
+                      }
+                    >
+                      {[...Array(item.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </select>
                 <span className='text-center w-1/5 font-semibold text-sm'>
-                  <NumberFormat value={item.price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} />
+                  <NumberFormat
+                    value={item.price}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'Rp.'}
+                  />
                 </span>
                 <span className='text-center w-1/5 font-semibold text-sm'>
-                  <NumberFormat value={item.price * item.qty} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} />
+                  <NumberFormat
+                    value={item.price * item.qty}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'Rp.'}
+                  />
                 </span>
               </div>
             ))}
 
             <button
               className='flex font-semibold text-indigo-600 text-sm mt-10'
-              onClick={() => navigate(-1)}
+              onClick={() => navigate(-2)}
             >
               <svg
                 className='fill-current mr-2 text-indigo-600 w-4'
@@ -119,11 +125,13 @@ const Cart = () => {
           </div>
 
           <div id='summary' className='w-1/4 px-8 py-10'>
-            <h1 className='font-semibold text-2xl border-b pb-8'>
+            <h1 className='text-title border-b pb-8'>
               Order Summary
             </h1>
             <div className='flex justify-between mt-10 mb-5'>
-              <span className='font-semibold text-sm uppercase'>Items {totalItems()}</span>
+              <span className='font-semibold text-sm uppercase'>
+                Items {totalItems()}
+              </span>
             </div>
             <div>
               <label className='font-medium inline-block mb-3 text-sm uppercase'>
@@ -149,7 +157,12 @@ const Cart = () => {
               <div className='text-total-cost'>
                 <span>Subtotal</span>
                 <span>
-                  <NumberFormat value={totalPrice()} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                  <NumberFormat
+                    value={totalPrice()}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'Rp. '}
+                  />
                 </span>
               </div>
               <button
