@@ -6,6 +6,7 @@ import './header.scss';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import KidsLogo from 'assets/images/kids.png';
+import HeaderTitle from 'assets/images/banner-text.png';
 
 /* import { DropdownMenu, MoreMenu } from 'components'; */
 
@@ -40,12 +41,13 @@ const Header = () => {
           <Popover.Group as='nav' className='hidden md:flex space-x-10'>
             {/*   <DropdownMenu/> */}
 
-            <Link to='/checkout' className='link'>
+            {/* <Link to='/checkout' className='link'>
               Checkout
             </Link>
             <Link to='/shipping' className='link'>
               Docs
-            </Link>
+            </Link> */}
+            <img src={HeaderTitle} alt="banner" height={420} width={420}/>
 
             {/* <MoreMenu/> */}
           </Popover.Group>
@@ -55,9 +57,9 @@ const Header = () => {
                 <svg
                   className='h-6 w-6'
                   fill='none'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
                   viewBox='0 0 24 24'
                   stroke='currentColor'
                 >
