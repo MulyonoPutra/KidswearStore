@@ -4,6 +4,7 @@ import { Home, Shipping } from 'pages';
 import ProductDetails from './../product-details/index';
 import Cart from './../cart/index';
 import Checkout from '../checkout/index';
+import Login from './../auth/login/index';
 
 const Main = () => {
   return (
@@ -13,9 +14,10 @@ const Main = () => {
         <Route path='/' element={<Home />} />
         <Route path='/shipping' element={<Shipping />} />
         <Route path='/details/:id' element={<ProductDetails />} />
-        <Route path='/cart/:id' element={<Cart/>} />
-        <Route path='/cart' element={<Cart/>} />
+        <Route path='/cart/:id' element={<Cart />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
+       
       </Routes>
     </>
   );

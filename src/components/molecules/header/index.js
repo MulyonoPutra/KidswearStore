@@ -73,7 +73,7 @@ const Header = () => {
                 </span>
               </button>
             </Link>
-            <Link to='/shipping' className='signin'>
+            <Link to='/login' className='signin'>
               Sign in
             </Link>
             <Link to='/shipping' className='signup'>
