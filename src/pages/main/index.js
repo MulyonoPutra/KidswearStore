@@ -17,7 +17,7 @@ const Main = () => {
         <Route path='/cart/:id' element={<Cart />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
-       
+        <Route path='/login' element={<Login />} />
       </Routes>
     </>
   );

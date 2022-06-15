@@ -1,10 +1,22 @@
 import { LoginButton, Input, Gap } from '../../../components';
 import './login.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { loginValidation } from './../../../utils/form-validation';
+import { useDispatch, useSelector } from 'react-redux';
+import { signin } from './../../../config/redux/action/user.action';
+import { useEffect } from 'react';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
+
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -12,10 +24,15 @@ const Login = () => {
     },
     loginValidation,
     onSubmit: (values) => {
-      console.log(values);
+      dispatch(signin(values.email, values.password));
     },
   });
 
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
   return (
     <div className='wrapper'>
