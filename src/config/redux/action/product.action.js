@@ -13,7 +13,7 @@ export const findAllProducts = () => {
     dispatch({ type: PRODUCT_LIST_REQUEST });
     try {
       const { data } = await axios.get('/v1/product');
-      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data.products });
     } catch (error) {
       dispatch({ type: PRODUCT_LIST_FAILURE, payload: error });
     }
@@ -25,7 +25,8 @@ export const findById = (id) => {
     dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: id });
     try {
       const { data } = await axios.get(`/v1/product/${id}`);
-      dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
+      const { product } = data;
+      dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: product });
     } catch (error) {
       dispatch({
         type: PRODUCT_DETAILS_FAILURE,

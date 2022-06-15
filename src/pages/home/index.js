@@ -6,15 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import './home.scss';
 
 const Home = () => {
-  // @ts-ignore
   const listProducts = useSelector((state) => state.productList);
   const { loading, error, products } = listProducts;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(findAllProducts());
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log('products', products);
+  })
 
   return (
     <>
@@ -27,9 +29,9 @@ const Home = () => {
           <div className='wrapper'>
             <div className='product-grid'>
               {products.map((product) => (
-                <div key={product.id}>
+                <div key={product._id}>
                   <ProductList
-                    id={product.id}
+                    id={product._id}
                     image={product.image}
                     imageAlt={product.name}
                     name={product.name}
