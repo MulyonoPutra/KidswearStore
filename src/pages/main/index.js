@@ -5,6 +5,7 @@ import ProductDetails from './../product-details/index';
 import Cart from './../cart/index';
 import Checkout from '../checkout/index';
 import Login from './../auth/login/index';
+import Register from './../auth/register/index';
 
 const Main = () => {
   return (
@@ -18,6 +19,7 @@ const Main = () => {
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
     </>
   );
