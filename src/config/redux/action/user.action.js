@@ -3,6 +3,7 @@ import {
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
   USER_SIGNIN_FAILURE,
+  USER_SIGNOUT_REQUEST,
 } from './../../constants/user.constant';
 
 export const signin = (email, password) => {
@@ -21,5 +22,13 @@ export const signin = (email, password) => {
             : error.message,
       });
     }
+  };
+};
+
+export const signout = () => {
+  return (dispatch) => {
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('cartItems');
+    dispatch({ type: USER_SIGNOUT_REQUEST });
   };
 };
