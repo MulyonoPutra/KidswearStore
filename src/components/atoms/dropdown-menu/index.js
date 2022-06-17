@@ -1,11 +1,40 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { solutions, callsToAction } from 'utils/header.collection';
 import { classNames } from 'components/molecules/header';
 import './dropdown-menu.scss';
+import { useNavigate } from 'react-router-dom'
 
 const DropdownMenu = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState(solutions);
+
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
+  const handleRegister = () => {
+    navigate('/register');
+  };
+
+  const handleLogout = () => {
+    console.log('handleLogout');
+  };
+
+  const onSubmit = (item) => {
+    console.log('onSubmit', item);
+    if(item.name === 'Login') {
+      handleLogin();
+    }
+    if(item.name === 'Register') {
+      handleRegister();
+    }
+    if(item.name === 'Logout') {
+      handleLogout();
+    }
+  };
+
   return (
     <Popover className='relative'>
       {({ open }) => (
@@ -38,11 +67,11 @@ const DropdownMenu = () => {
             <Popover.Panel className='popover-panel'>
               <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
                 <div className='relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8'>
-                  {solutions.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className='-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50'
+                  {data.map((item) => (
+                    <div
+                      key={item.id}
+                      onClick={() => onSubmit(item)}
+                      className='-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer'
                     >
                       <item.icon
                         className='flex-shrink-0 h-6 w-6 text-indigo-600'
@@ -52,11 +81,8 @@ const DropdownMenu = () => {
                         <p className='text-base font-medium text-gray-900'>
                           {item.name}
                         </p>
-                        <p className='mt-1 text-sm text-gray-500'>
-                          {item.description}
-                        </p>
                       </div>
-                    </a>
+                    </div>
                   ))}
                 </div>
                 <div className='px-5 py-5 bg-gray-50 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8'>

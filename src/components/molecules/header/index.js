@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import KidsLogo from 'assets/images/kids.png';
 import HeaderTitle from 'assets/images/banner-text.png';
 
-/* import { DropdownMenu, MoreMenu } from 'components'; */
+import { DropdownMenu, MoreMenu } from 'components';
 
 export const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');
@@ -42,17 +42,7 @@ const Header = () => {
             </Popover.Button>
           </div>
           <Popover.Group as='nav' className='hidden md:flex space-x-10'>
-            {/*   <DropdownMenu/> */}
-
-            {/* <Link to='/checkout' className='link'>
-              Checkout
-            </Link>
-            <Link to='/shipping' className='link'>
-              Docs
-            </Link> */}
             <img src={HeaderTitle} alt='banner' height={420} width={420} />
-
-            {/* <MoreMenu/> */}
           </Popover.Group>
           <div className='wrapper-btn'>
             <Link to='/cart' className='signin mr-3'>
@@ -73,7 +63,8 @@ const Header = () => {
                 </span>
               </button>
             </Link>
-            {userInfo ? (
+            <DropdownMenu />
+            {/*  {userInfo ? (
               <Link to='#'>{userInfo.name}</Link>
             ) : (
               <div>
@@ -84,7 +75,7 @@ const Header = () => {
                   Sign up
                 </Link>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
@@ -122,9 +113,8 @@ const Header = () => {
               <div className='mt-6'>
                 <nav className='grid gap-y-8'>
                   {solutions.map((item) => (
-                    <a
+                    <div
                       key={item.name}
-                      href={item.href}
                       className='-m-3 p-3 flex items-center rounded-md hover:bg-gray-50'
                     >
                       <item.icon
@@ -134,7 +124,7 @@ const Header = () => {
                       <span className='ml-3 text-base font-medium text-gray-900'>
                         {item.name}
                       </span>
-                    </a>
+                    </div>
                   ))}
                 </nav>
               </div>
