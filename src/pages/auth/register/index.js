@@ -1,6 +1,6 @@
 import './register.scss';
 import { useFormik } from 'formik';
-import { registerValidation } from './../../../utils/form-validation';
+import { registerValidation } from '../../../utils/form-validation';
 import {
   Input,
   Gap,

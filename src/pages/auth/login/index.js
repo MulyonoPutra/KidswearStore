@@ -9,7 +9,7 @@ import {
 } from '../../../components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from './../../../config/redux/action/user.action';
+import { signin } from '../../../config/redux/action/user.action';
 
 const Login = () => {
   const navigate = useNavigate();

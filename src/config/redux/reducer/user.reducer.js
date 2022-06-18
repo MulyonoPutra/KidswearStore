@@ -6,7 +6,7 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAILURE,
-} from './../../constants/user.constant';
+} from '../../constants/user.constant';
 
 export const userSigninReducer = (state = {}, action) => {
   switch (action.type) {
