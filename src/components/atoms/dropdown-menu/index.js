@@ -1,14 +1,22 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react'
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { solutions, callsToAction } from 'utils/header.collection';
 import { classNames } from 'components/molecules/header';
 import './dropdown-menu.scss';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from 'config/redux/action/user.action';
 
 const DropdownMenu = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [data, setData] = useState(solutions);
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
   const handleLogin = () => {
     navigate('/login');
@@ -20,40 +28,47 @@ const DropdownMenu = () => {
 
   const handleLogout = () => {
     console.log('handleLogout');
+    dispatch(signout());
   };
 
   const onSubmit = (item) => {
     console.log('onSubmit', item);
-    if(item.name === 'Login') {
+    if (item.name === 'Login') {
       handleLogin();
     }
-    if(item.name === 'Register') {
+    if (item.name === 'Register') {
       handleRegister();
     }
-    if(item.name === 'Logout') {
+    if (item.name === 'Logout') {
       handleLogout();
     }
   };
+
+  
 
   return (
     <Popover className='relative'>
       {({ open }) => (
         <>
-          <Popover.Button
-            className={classNames(
-              open ? 'text-gray-900' : 'text-gray-500',
-              'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-            )}
-          >
-            <span>Solutions</span>
-            <ChevronDownIcon
+          {userInfo ? (
+            <Popover.Button
               className={classNames(
-                open ? 'text-gray-600' : 'text-gray-400',
-                'ml-2 h-5 w-5 group-hover:text-gray-500'
+                open ? 'text-gray-900' : 'text-gray-500',
+                'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
               )}
-              aria-hidden='true'
-            />
-          </Popover.Button>
+            >
+              <span>{userInfo.name}</span>
+              <ChevronDownIcon
+                className={classNames(
+                  open ? 'text-gray-600' : 'text-gray-400',
+                  'ml-2 h-5 w-5 group-hover:text-gray-500'
+                )}
+                aria-hidden='true'
+              />
+            </Popover.Button>
+          ) : (
+            <Link to='/login' className='text-gray-900'>Sign In</Link>
+          )}
 
           <Transition
             as={Fragment}

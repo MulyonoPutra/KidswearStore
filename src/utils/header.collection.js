@@ -14,16 +14,16 @@ import {
 } from '@heroicons/react/outline';
 
 const solutions = [
-  {
-    id: 1,
-    name: 'Login',
-    icon: ChartBarIcon,
-  },
-  {
-    id: 2,
-    name: 'Register',
-    icon: CursorClickIcon,
-  },
+  // {
+  //   id: 1,
+  //   name: 'Login',
+  //   icon: ChartBarIcon,
+  // },
+  // {
+  //   id: 2,
+  //   name: 'Register',
+  //   icon: CursorClickIcon,
+  // },
   {
     id: 3,
     name: 'Logout',

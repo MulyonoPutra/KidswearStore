@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import {
   addToCart,
   removeFromCart,
-} from './../../config/redux/action/cart.action';
+} from '../../config/redux/action/cart.action';
 import { useSelector } from 'react-redux';
 import NumberFormat from 'react-number-format';
 
@@ -167,7 +167,7 @@ const Cart = () => {
               </div>
               <button
                 className='btn-checkout'
-                onClick={() => navigate('/checkout')}
+                onClick={() => navigate('/signin?redirect=/checkout')}
               >
                 Checkout
               </button>

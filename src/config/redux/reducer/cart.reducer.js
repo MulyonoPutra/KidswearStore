@@ -1,7 +1,7 @@
 import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
-} from './../../constants/cart.constant';
+} from '../../constants/cart.constant';
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
