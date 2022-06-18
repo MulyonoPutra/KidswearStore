@@ -1,21 +1,55 @@
 import './register.scss';
 import { useFormik } from 'formik';
 import { registerValidation } from './../../../utils/form-validation';
-import { Input, Gap, LoginButton } from './../../../components';
+import {
+  Input,
+  Gap,
+  LoginButton,
+  Loading,
+  ErrorToast,
+} from './../../../components';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from 'config/redux/action/user.action';
+import { useEffect } from 'react';
 
 const Register = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, loading, error } = userRegister;
+
   const formik = useFormik({
     initialValues: {
       username: '',
       email: '',
       password: '',
-      rememberMe: false,
+      confirmPassword: '',
     },
     registerValidation,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      if (values.password !== values.confirmPassword) {
+        alert('Password and Confirm Password must be same');
+      } else {
+        dispatch(register(values.username, values.email, values.password));
+        navigate(redirect);
+      }
     },
   });
+
+  const navigateUrl = () => {
+    navigate(`/login?redirect=${redirect}`);
+  };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
   return (
     <div className='wrapper'>
@@ -30,6 +64,8 @@ const Register = () => {
             Register
           </h2>
         </div>
+        {loading && <Loading />}
+        {error && <ErrorToast />}
         <form className='mt-8 space-y-6'>
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='rounded-md shadow-sm -space-y-px'>
@@ -66,45 +102,38 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.password}
             />
+            <Gap height={10} />
+            <Input
+              label='confirm-password'
+              placeholder='Confirm Password'
+              name='confirmPassword'
+              onChange={formik.handleChange}
+              value={formik.values.confirmPassword}
+            />
           </div>
 
-          <div className='flex items-center justify-between'>
-            <div className='flex items-center'>
-              <input
-                id='remember-me'
-                name='rememberMe'
-                type='checkbox'
-                className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
-              />
-
-              <label
-                htmlFor='remember-me'
-                className='ml-2 block text-sm text-gray-900'
-              >
-                Remember me
-              </label>
-              <br />
-            </div>
-
-            <div className='text-sm'>
-              <a
-                href='!#'
-                className='font-medium text-indigo-600 hover:text-indigo-500'
-              >
-                Forgot your password?
-              </a>
-            </div>
-          </div>
-          {formik.errors.rememberMe ? (
-            <span className='text-red-600 text-sm'>
-              {formik.errors.rememberMe}
-            </span>
-          ) : null}
           <div>
             <LoginButton
               title='Register'
               handleClick={formik.handleSubmit}
             ></LoginButton>
+          </div>
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center'>
+              <label
+                htmlFor='remember-me'
+                className='block text-sm text-gray-900'
+              >
+                Already have an account? please{' '}
+                <span
+                  className='underline text-indigo-500'
+                  onClick={navigateUrl}
+                >
+                  Sign in.
+                </span>
+              </label>
+              <br />
+            </div>
           </div>
         </form>
       </div>

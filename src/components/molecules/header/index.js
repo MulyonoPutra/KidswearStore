@@ -1,14 +1,15 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { solutions, resources } from 'utils/header.collection';
 import './header.scss';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import KidsLogo from 'assets/images/kids.png';
 import HeaderTitle from 'assets/images/banner-text.png';
 
-import { DropdownMenu, MoreMenu } from 'components';
+// import { DropdownMenu } from 'components';
+import { signout } from 'config/redux/action/user.action';
 
 export const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ');
@@ -20,6 +21,12 @@ const Header = () => {
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+
+  const dispatch = useDispatch();
+  
+  const signoutHandler = () => {
+    dispatch(signout());
+  };
 
   return (
     <Popover className='relative bg-white'>
@@ -63,19 +70,23 @@ const Header = () => {
                 </span>
               </button>
             </Link>
-            <DropdownMenu />
-            {/*  {userInfo ? (
-              <Link to='#'>{userInfo.name}</Link>
-            ) : (
-              <div>
-                <Link to='/login' className='signin'>
-                  Sign in
+            {/* <DropdownMenu /> */}
+            {userInfo ? (
+              <div className='dropdown'>
+                <Link to='#'>
+                  {userInfo.name} <i className='fa fa-caret-down'></i>{' '}
                 </Link>
-                <Link to='/shipping' className='signup'>
-                  Sign up
-                </Link>
+                <ul className='dropdown-content'>
+                  <li>
+                    <Link to='#signout' onClick={signoutHandler}>
+                      Sign Out
+                    </Link>
+                  </li>
+                </ul>
               </div>
-            )} */}
+            ) : (
+              <Link to='/login'>Sign In</Link>
+            )}
           </div>
         </div>
       </div>

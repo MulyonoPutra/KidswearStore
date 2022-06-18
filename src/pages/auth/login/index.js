@@ -1,32 +1,34 @@
-import { LoginButton, Input, Gap } from '../../../components';
+import { useEffect, useState } from 'react';
 import './login.scss';
+import {
+  LoginButton,
+  Input,
+  Gap,
+  ErrorToast,
+  Loading,
+} from '../../../components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import { loginValidation } from './../../../utils/form-validation';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from './../../../config/redux/action/user.action';
-import { useEffect } from 'react';
 
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get('redirect');
   const redirect = redirectInUrl ? redirectInUrl : '/';
 
   const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const { userInfo, loading, error } = userSignin;
 
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    loginValidation,
-    onSubmit: (values) => {
-      dispatch(signin(values.email, values.password));
-    },
-  });
+  const dispatch = useDispatch();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(signin(email, password));
+  };
 
   useEffect(() => {
     if (userInfo) {
@@ -45,49 +47,30 @@ const Login = () => {
           />
           <h2 className='sign-in-text'>Sign in to your account</h2>
         </div>
-        <form className='mt-8 space-y-6'>
+        {loading && <Loading />}
+        {error && <ErrorToast />}
+        <form className='mt-8 space-y-6' onSubmit={submitHandler}>
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='rounded-md shadow-sm -space-y-px'>
             <Input
               label='email'
-              name='email'
               placeholder='Email Address'
-              onChange={formik.handleChange}
-              value={formik.values.email}
+              id='email'
+              required
+              onChange={(e) => setEmail(e.target.value)}
             />
-            {formik.errors.email ? (
-              <span className='text-red-600 text-sm'>
-                {formik.errors.email}
-              </span>
-            ) : null}
             <Gap height={10} />
             <Input
               label='password'
-              name='password'
               placeholder='Password'
-              onChange={formik.handleChange}
-              value={formik.values.password}
+              id='password'
+              required
+              onChange={(e) => setPassword(e.target.value)}
             />
-            {formik.errors.password ? (
-              <span className='text-red-600 text-sm'>
-                {formik.errors.password}
-              </span>
-            ) : null}
           </div>
 
           <div className='flex items-center justify-between'>
-            <div className='flex items-center'>
-              <input
-                id='remember-me'
-                name='remember-me'
-                type='checkbox'
-                className='checkbox'
-              />
-              <label className='ml-2 block text-sm text-gray-900'>
-                Remember me
-              </label>
-            </div>
-
+            <Gap />
             <div className='text-sm'>
               <Link to='/' className='text-forgot-password'>
                 Forgot your password?
@@ -96,10 +79,7 @@ const Login = () => {
           </div>
 
           <div>
-            <LoginButton
-              title='Sign In'
-              handleClick={formik.handleSubmit}
-            ></LoginButton>
+            <LoginButton title='Sign In' type='submit'></LoginButton>
           </div>
         </form>
         <div className='flex items-center justify-between'>
