@@ -86,7 +86,7 @@ const Login = () => {
           <div className='flex items-center text-sm'>
             <span>New Customer?</span>
             <span className='ml-2 block text-gray-900 text-forgot-password'>
-              <Link to='/register'>Create your account</Link>
+              <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
             </span>
           </div>
         </div>

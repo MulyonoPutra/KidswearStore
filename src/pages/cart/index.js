@@ -41,6 +41,10 @@ const Cart = () => {
     dispatch(removeFromCart(id));
   };
 
+  const checkoutHandler = () => {
+    navigate('/login?redirect=/checkout');
+  };
+
 
   return (
     <>
@@ -167,7 +171,7 @@ const Cart = () => {
               </div>
               <button
                 className='btn-checkout'
-                onClick={() => navigate('/signin?redirect=/checkout')}
+                onClick={checkoutHandler}
               >
                 Checkout
               </button>
