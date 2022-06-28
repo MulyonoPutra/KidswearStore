@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import KidsLogo from 'assets/images/kids.png';
 import HeaderTitle from 'assets/images/banner-text.png';
-
-// import { DropdownMenu } from 'components';
 import { signout } from 'config/redux/action/user.action';
 
 export const classNames = (...classes) => {
@@ -73,8 +71,8 @@ const Header = () => {
             {/* <DropdownMenu /> */}
             {userInfo ? (
               <div className='dropdown'>
-                <Link to='#'>
-                  {userInfo.name} <i className='fa fa-caret-down'></i>{' '}
+                <Link to='#' className='text-indigo-700'>
+                  {userInfo.name} 
                 </Link>
                 <ul className='dropdown-content'>
                   <li>
