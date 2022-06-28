@@ -65,7 +65,7 @@ const Cart = () => {
             </div>
             {cartItems.map((item) => (
               <div className='card-order-summary'>
-                <li className='flex w-2/5' key={item.id}>
+                <li className='flex' style={{ width: 351 }} key={item.id}>
                   <div className='w-20'>
                     <img className='h-24' src={item.image} alt={item.name} />
                   </div>
@@ -95,7 +95,7 @@ const Cart = () => {
                         </option>
                       ))}
                     </select>
-                <span className='text-center w-1/5 font-semibold text-sm'>
+                <span className='text-value' style={{ marginLeft: 108 }}>
                   <NumberFormat
                     value={item.price}
                     displayType={'text'}
@@ -103,7 +103,7 @@ const Cart = () => {
                     prefix={'Rp.'}
                   />
                 </span>
-                <span className='text-center w-1/5 font-semibold text-sm'>
+                <span className='text-value'>
                   <NumberFormat
                     value={item.price * item.qty}
                     displayType={'text'}
@@ -142,21 +142,9 @@ const Cart = () => {
                 Shipping
               </label>
               <select className='block p-2 text-gray-600 w-full text-sm'>
-                <option>Standard shipping - $10.00</option>
+                <option>Free Shipping - Rp. 0</option>
               </select>
             </div>
-            <div className='py-10'>
-              <label htmlFor='promo' className='text-promo'>
-                Promo Code
-              </label>
-              <input
-                type='text'
-                id='promo'
-                placeholder='Enter your code'
-                className='p-2 text-sm w-full'
-              />
-            </div>
-            <button className='btn-apply'>Apply</button>
             <div className='border-t mt-8'>
               <div className='text-total-cost'>
                 <span>Subtotal</span>

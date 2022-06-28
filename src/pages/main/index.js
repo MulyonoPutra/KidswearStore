@@ -6,7 +6,8 @@ import Cart from './../cart/index';
 import Checkout from '../checkout/index';
 import Login from './../auth/login/index';
 import Register from './../auth/register/index';
-import Payment from './../payment/index'
+import Payment from './../payment/index';
+import PlaceOrder from './../place-order/index';
 
 const Main = () => {
   return (
@@ -22,6 +23,7 @@ const Main = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/payment' element={<Payment />} />
+        <Route path='/place-order' element={<PlaceOrder />} />
       </Routes>
     </>
   );

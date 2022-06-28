@@ -29,11 +29,13 @@
     }
 
     &-row-label {
-        @apply font-semibold text-center text-gray-600 text-xs uppercase w-1/5;
+        width: 27%;
+        @apply font-semibold text-center text-gray-600 text-xs uppercase;
     }
 
     &-product-details {
-        @apply font-semibold text-gray-600 text-xs uppercase w-2/5
+        width: 28%;
+        @apply font-semibold text-gray-600 text-xs uppercase
     }
 
     &-title {
@@ -42,6 +44,11 @@
 
     &-remove {
         @apply font-semibold hover:text-red-500 text-gray-500 text-xs;
+    }
+
+    &-value {
+        width: 23%;
+        @apply text-center font-semibold text-sm;
     }
 }
 

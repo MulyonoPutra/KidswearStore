@@ -14,10 +14,6 @@ const Home = () => {
     dispatch(findAllProducts());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log('products', products);
-  })
-
   return (
     <>
       {loading ? (
