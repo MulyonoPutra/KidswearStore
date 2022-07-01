@@ -1,29 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import './place-order.scss';
-import { createOrder } from './../../config/redux/action/order.action';
-import { ORDER_CREATE_RESET } from 'config/constants/order.constant';
+import { useNavigate, useParams } from 'react-router-dom';
+import './order.scss';
+import { detailsOrder } from './../../config/redux/action/order.action';
 
-const PlaceOrder = () => {
+const Order = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const cart = useSelector((state) => state.cart);
+  const orderDetails = useSelector((state) => state.orderDetails);
   const userSignin = useSelector((state) => state.userSignin);
-  const { cartItems, shippingAddress } = cart;
+  const { order, loading, error } = orderDetails;
 
-  const totalPrice = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.qty, 0);
-  };
+  const params = useParams();
+  const { id: orderId } = params;
 
   const [items, setItems] = useState({});
   const { userInfo } = userSignin;
-  const orderCreate = useSelector((state) => state.orderCreate);
-  const { loading, success, error, order } = orderCreate;
 
   useEffect(() => {
-    cartItems.map((item) => {
+    order?.orderItems?.map((item) => {
       return setItems({
         name: item.name,
         image: item.image,
@@ -37,44 +32,22 @@ const PlaceOrder = () => {
         qty: item.qty,
       });
     });
-  }, [cartItems]);
+  }, [order?.orderItems]);
 
   useEffect(() => {
-    if (!cart.paymentMethod) {
-      navigate('/payment');
-    }
-  }, [cart.paymentMethod, navigate]);
+    dispatch(detailsOrder(orderId));
+  }, [dispatch, orderId]);
 
   useEffect(() => {
-    if (success) {
-      console.log('success create new order!!');
-      navigate(`/order/${order._id}`);
-      dispatch({ type: ORDER_CREATE_RESET });
-    }
-  }, [dispatch, navigate, order, success]);
-
-  const toPrice = (num) => Number(num.toFixed(2));
-
-  cart.itemsPrice = toPrice(
-    cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
-  );
-
-  cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
-
-  cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
-
-  const placeOrderHandler = () => {
-    dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
-  };
+    console.log(order);
+  }, [order]);
 
   return (
     <div className='py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto'>
       <div className='flex justify-start item-start space-y-2 flex-col '>
-        <h1 className='order-items-text-lg'>Order #13432</h1>
+        <h1 className='order-items-text-lg'>Order #{order?._id}</h1>
         <p className='text-base font-medium leading-6 text-gray-600'>
-          21st Mart 2021 at 10:34 PM
+          {order?.createdAt}
         </p>
       </div>
       <div className='mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0'>
@@ -138,9 +111,7 @@ const PlaceOrder = () => {
               <div className='flex justify-center items-center w-full space-y-4 flex-col border-gray-200 border-b pb-4'>
                 <div className='flex justify-between  w-full'>
                   <p className='text-base leading-4 text-gray-800'>Subtotal</p>
-                  <p className='text-base leading-4 text-gray-600'>
-                    {totalPrice()}
-                  </p>
+                  <p className='text-base leading-4 text-gray-600'></p>
                 </div>
                 <div className='flex justify-between items-center w-full'>
                   <p className='text-base leading-4 text-gray-800'>
@@ -215,7 +186,7 @@ const PlaceOrder = () => {
                 />
                 <div className=' flex justify-start items-start flex-col space-y-2'>
                   <p className='text-base font-semibold leading-4 text-left text-gray-800'>
-                  {userInfo.name}
+                    {userInfo.name}
                   </p>
                   <p className='text-sm leading-5 text-gray-600'>
                     10 Previous Orders
@@ -256,7 +227,7 @@ const PlaceOrder = () => {
                     Shipping Address
                   </p>
                   <p className='w-48 lg:w-full xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600'>
-                    {shippingAddress.address}
+                    {order?.shippingAddress?.address}
                   </p>
                 </div>
                 <div className='flex justify-center md:justify-start  items-center md:items-start flex-col space-y-4 '>
@@ -264,18 +235,9 @@ const PlaceOrder = () => {
                     Billing Address
                   </p>
                   <p className='w-48 lg:w-full xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600'>
-                    {shippingAddress.address}
+                    {order?.shippingAddress?.address}
                   </p>
                 </div>
-              </div>
-              <div className='flex w-full justify-center items-center md:justify-start md:items-start'>
-                <button
-                  className='mt-6 md:mt-0 py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base leading-4 text-gray-800'
-                  onClick={placeOrderHandler}
-                  type='button'
-                >
-                  Place Order
-                </button>
               </div>
             </div>
           </div>
@@ -285,4 +247,4 @@ const PlaceOrder = () => {
   );
 };
 
-export default PlaceOrder;
+export default Order;

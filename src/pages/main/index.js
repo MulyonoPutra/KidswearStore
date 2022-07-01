@@ -8,6 +8,7 @@ import Login from './../auth/login/index';
 import Register from './../auth/register/index';
 import Payment from './../payment/index';
 import PlaceOrder from './../place-order/index';
+import Order from './../order/index';
 
 const Main = () => {
   return (
@@ -24,6 +25,7 @@ const Main = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/place-order' element={<PlaceOrder />} />
+        <Route path='/order/:id' element={<Order />} />
       </Routes>
     </>
   );
