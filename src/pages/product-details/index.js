@@ -1,22 +1,27 @@
-import { ErrorToast, Loading, Divider, Rating } from 'components';
+import './product-details.scss';
 import { findById } from 'config/redux/action/product.action';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import './product-details.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { ErrorToast, Loading, Divider, Rating } from 'components';
 import MinusIcon from 'assets/icons/minus.svg';
 import PlusIcon from 'assets/icons/plus.svg';
 import PencilIcon from 'assets/icons/pencil.svg';
 import NumberFormat from 'react-number-format';
 
 const ProductDetails = () => {
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { id: productId } = useParams();
+
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
-  const navigate = useNavigate();
-  const [qty, setQty] = useState(1);
+  
+  const [qty, setQty] = useState(1);  
   const [isHidden, setIsHidden] = useState(true);
+  const [selectedSize, setSelectedSize] = useState('');
 
   const addCount = () => {
     setQty((prev) => prev + 1);
@@ -42,6 +47,10 @@ const ProductDetails = () => {
 
   const addToCartHandler = () => {
     navigate(`/cart/${productId}?qty=${qty}`);
+  };
+
+  const selected = (e) => {
+    setSelectedSize(e.target.value);
   };
 
   return (
@@ -138,11 +147,16 @@ const ProductDetails = () => {
                       <div className='flex ml-6 items-center'>
                         <span className='mr-3'>Size</span>
                         <div className='relative'>
-                          <select className='rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10'>
-                            <option>SM</option>
-                            <option>M</option>
-                            <option>L</option>
-                            <option>XL</option>
+                          <select
+                            className='rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10'
+                            onChange={selected}
+                            value={selectedSize}
+                          >
+                            {product?.size?.map((item) => (
+                              <option key={item} value={item}>
+                                {item}
+                              </option>
+                            ))}
                           </select>
                           <span className='absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center'>
                             <svg
@@ -181,7 +195,6 @@ const ProductDetails = () => {
                               type='text'
                               value={qty}
                               onChange={(e) => {
-                                // @ts-ignore
                                 setQty(e.target.value);
                               }}
                             />
