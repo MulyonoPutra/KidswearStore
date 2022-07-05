@@ -45,7 +45,6 @@ const Cart = () => {
     navigate('/login?redirect=/checkout');
   };
 
-
   return (
     <>
       <div className='container mx-auto mt-10 px-10'>
@@ -53,9 +52,7 @@ const Cart = () => {
           <div className='w-3/4 bg-white px-10 py-10'>
             <div className='flex justify-between border-b pb-8'>
               <h1 className='text-title'>Shopping Cart</h1>
-              <h2 className='text-title'>
-                {cartItems.length} Items
-              </h2>
+              <h2 className='text-title'>{cartItems.length} Items</h2>
             </div>
             <div className='flex mt-10 mb-5'>
               <h3 className='text-product-details'>Product Details</h3>
@@ -82,19 +79,17 @@ const Cart = () => {
                   </div>
                 </li>
                 <select
-                      value={item.qty}
-                      onChange={(e) =>
-                        dispatch(
-                          addToCart(item.product, Number(e.target.value))
-                        )
-                      }
-                    >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </select>
+                  value={item.qty}
+                  onChange={(e) =>
+                    dispatch(addToCart(item.product, Number(e.target.value)))
+                  }
+                >
+                  {[...Array(item.countInStock).keys()].map((x) => (
+                    <option key={x + 1} value={x + 1}>
+                      {x + 1}
+                    </option>
+                  ))}
+                </select>
                 <span className='text-value' style={{ marginLeft: 108 }}>
                   <NumberFormat
                     value={item.price}
@@ -129,9 +124,7 @@ const Cart = () => {
           </div>
 
           <div id='summary' className='w-1/4 px-8 py-10'>
-            <h1 className='text-title border-b pb-8'>
-              Order Summary
-            </h1>
+            <h1 className='text-title border-b pb-8'>Order Summary</h1>
             <div className='flex justify-between mt-10 mb-5'>
               <span className='font-semibold text-sm uppercase'>
                 Items {totalItems()}
@@ -157,10 +150,7 @@ const Cart = () => {
                   />
                 </span>
               </div>
-              <button
-                className='btn-checkout'
-                onClick={checkoutHandler}
-              >
+              <button className='btn-checkout' onClick={checkoutHandler}>
                 Checkout
               </button>
             </div>
