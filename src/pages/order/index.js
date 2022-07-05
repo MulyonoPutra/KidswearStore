@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { detailsOrder } from './../../config/redux/action/order.action';
 import Moment from 'react-moment';
+import { Alert } from 'components';
 
 const Order = () => {
   const dispatch = useDispatch();
@@ -75,10 +76,6 @@ const Order = () => {
                   </h3>
                   <div className='flex justify-start items-start flex-col space-y-2'>
                     <p className='text-sm leading-none text-gray-800'>
-                      <span className='text-gray-300'>Style: </span> Italic
-                      Minimal Design
-                    </p>
-                    <p className='text-sm leading-none text-gray-800'>
                       <span className='text-gray-300'>Size: </span> Small
                     </p>
                     <p className='text-sm leading-none text-gray-800'>
@@ -136,7 +133,7 @@ const Order = () => {
               <h3 className='text-xl font-semibold leading-5 text-gray-800'>
                 Shipping
               </h3>
-              <div className='flex justify-between items-start w-full'>
+              <div className='flex justify-between items-start w-full border-gray-200 border-b pb-4'>
                 <div className='flex justify-center items-center space-x-4'>
                   <div className='w-8 h-8'>
                     <img
@@ -159,14 +156,37 @@ const Order = () => {
                   Rp. 0
                 </p>
               </div>
-              <div className='w-full flex justify-center items-center'></div>
+              {
+                order?.isDelivered ? (<Alert condition={order?.isDelivered} title='Not Delivered' messages='Please finish your payment.'/>)
+                : (<Alert condition={order?.isDelivered} title='Not Delivered' messages='Please finish your payment.'/>)
+              }
+              <div className='flex justify-between items-start w-full border-gray-200 border-b pb-4'>
+                <div className='flex justify-center items-center space-x-4'>
+                  <div className='w-8 h-8'>
+                    <img
+                      className='w-full h-full'
+                      alt='logo'
+                      src='https://www.sketchappsources.com/resources/source-image/PayPalCard.png'
+                    />
+                  </div>
+                  <div className='flex flex-col justify-start items-center'>
+                    <p className='text-lg leading-6 font-semibold text-gray-800'>
+                      {order?.paymentMethod}
+                      <br />
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {
+                order?.isPaid ? (<Alert condition={order?.isPaid} title='Not Paid' messages='Please finish your payment.'/>)
+                : (<Alert condition={order?.isPaid} title='Not Paid' messages='Please finish your payment.'/>)
+              }
+              
             </div>
           </div>
         </div>
         <div className='customer'>
-          <h3 className='customer-title'>
-            Customer
-          </h3>
+          <h3 className='customer-title'>Customer</h3>
           <div className='customer-card'>
             <div className='flex flex-col justify-start items-start flex-shrink-0'>
               <div className='customer-card-wrapper'>
@@ -205,9 +225,7 @@ const Order = () => {
                     strokeLinejoin='round'
                   />
                 </svg>
-                <p className='customer-email-text'>
-                  {userInfo.email}
-                </p>
+                <p className='customer-email-text'>{userInfo.email}</p>
               </div>
             </div>
             <div className='customer-address'>

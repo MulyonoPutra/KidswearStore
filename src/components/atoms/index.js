@@ -7,6 +7,7 @@ import Rating from './rating';
 import LoginButton from './login-button';
 import Input from './input';
 import Gap from './gap';
+import Alert from './alert/index'
 
 export {
   DropdownMenu,
@@ -18,4 +19,5 @@ export {
   Input,
   LoginButton,
   Gap,
+  Alert
 };
