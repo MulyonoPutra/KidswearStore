@@ -1,14 +1,17 @@
 import './order.scss';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+
 import { useParams } from 'react-router-dom';
 import { detailsOrder } from './../../config/redux/action/order.action';
-import Moment from 'react-moment';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Loading } from 'components';
-import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
 
+import Moment from 'react-moment';
+
 const Order = () => {
+  
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
@@ -16,6 +19,7 @@ const Order = () => {
   const { order } = orderDetails;
 
   const params = useParams();
+
   const { id: orderId } = params;
 
   const [items, setItems] = useState({});
@@ -55,6 +59,7 @@ const Order = () => {
       };
       document.body.appendChild(script);
     };
+
     if (!order?._id) {
       dispatch(detailsOrder(orderId));
     } else {
@@ -169,14 +174,6 @@ const Order = () => {
                   )}
                 </div>
               )}
-              {/* <div className='flex w-full justify-center items-center md:justify-start md:items-start'>
-                <button
-                  className='mt-6 md:mt-0 py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base leading-4 text-gray-800'
-                  type='button'
-                >
-                  Payment
-                </button>
-              </div> */}
             </div>
             <div className='order-items-shipping'>
               <h3 className='text-xl font-semibold leading-5 text-gray-800'>
