@@ -1,20 +1,23 @@
+import './order.scss';
+
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import './order.scss';
+import { useParams } from 'react-router-dom';
 import { detailsOrder } from './../../config/redux/action/order.action';
+import Moment from 'react-moment';
 
 const Order = () => {
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const userSignin = useSelector((state) => state.userSignin);
-  const { order, loading, error } = orderDetails;
+  const { order } = orderDetails;
 
   const params = useParams();
   const { id: orderId } = params;
 
   const [items, setItems] = useState({});
+
   const { userInfo } = userSignin;
 
   useEffect(() => {
@@ -30,27 +33,25 @@ const Order = () => {
         numReviews: item.numReviews,
         countInStock: item.countInStock,
         qty: item.qty,
+        itemsPrice: item.itemsPrice,
+        shippingAddress: item.shippingAddress,
       });
     });
-  }, [order?.orderItems]);
+  }, [items.shippingAddress, order?.orderItems]);
 
   useEffect(() => {
     dispatch(detailsOrder(orderId));
   }, [dispatch, orderId]);
-
-  useEffect(() => {
-    console.log(order);
-  }, [order]);
 
   return (
     <div className='py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto'>
       <div className='flex justify-start item-start space-y-2 flex-col '>
         <h1 className='order-items-text-lg'>Order #{order?._id}</h1>
         <p className='text-base font-medium leading-6 text-gray-600'>
-          {order?.createdAt}
+          <Moment format='LLLL' date={order?.createdAt} />
         </p>
       </div>
-      <div className='mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0'>
+      <div className='wrapper'>
         <div className='order-items-wrapper'>
           <div className='order-items-card'>
             <p className='order-items-text'>Order Items</p>
@@ -67,7 +68,7 @@ const Order = () => {
                   alt='dress'
                 />
               </div>
-              <div className='border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full  pb-8 space-y-4 md:space-y-0'>
+              <div className='card-items'>
                 <div className='w-full flex flex-col justify-start items-start space-y-8'>
                   <h3 className='text-xl xl:text-2xl font-semibold leading-6 text-gray-800'>
                     {items.name}
@@ -103,25 +104,18 @@ const Order = () => {
               </div>
             </div>
           </div>
-          <div className='flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8'>
-            <div className='flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6   '>
+
+          {/* Order Summary */}
+          <div className='order-items-summary'>
+            <div className='flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6'>
               <h3 className='text-xl font-semibold leading-5 text-gray-800'>
                 Summary
               </h3>
               <div className='flex justify-center items-center w-full space-y-4 flex-col border-gray-200 border-b pb-4'>
                 <div className='flex justify-between  w-full'>
                   <p className='text-base leading-4 text-gray-800'>Subtotal</p>
-                  <p className='text-base leading-4 text-gray-600'></p>
-                </div>
-                <div className='flex justify-between items-center w-full'>
-                  <p className='text-base leading-4 text-gray-800'>
-                    Discount{' '}
-                    <span className='bg-gray-200 p-1 text-xs font-medium leading-3  text-gray-800'>
-                      STUDENT
-                    </span>
-                  </p>
                   <p className='text-base leading-4 text-gray-600'>
-                    -$28.00 (50%)
+                    Rp. {items.qty * items.price}
                   </p>
                 </div>
                 <div className='flex justify-between items-center w-full'>
@@ -134,11 +128,11 @@ const Order = () => {
                   Total
                 </p>
                 <p className='text-base font-semibold leading-4 text-gray-600'>
-                  $36.00
+                  Rp. {items.qty * items.price}
                 </p>
               </div>
             </div>
-            <div className='flex flex-col justify-center px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6   '>
+            <div className='order-items-shipping'>
               <h3 className='text-xl font-semibold leading-5 text-gray-800'>
                 Shipping
               </h3>
@@ -153,33 +147,29 @@ const Order = () => {
                   </div>
                   <div className='flex flex-col justify-start items-center'>
                     <p className='text-lg leading-6 font-semibold text-gray-800'>
-                      DPD Delivery
+                      JNT Express
                       <br />
                       <span className='font-normal'>
-                        Delivery with 24 Hours
+                        Delivery with 3 Days Maximum
                       </span>
                     </p>
                   </div>
                 </div>
                 <p className='text-lg font-semibold leading-6 text-gray-800'>
-                  $8.00
+                  Rp. 0
                 </p>
               </div>
-              <div className='w-full flex justify-center items-center'>
-                <button className='hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-5 w-96 md:w-full bg-gray-800 text-base font-medium leading-4 text-white'>
-                  View Carrier Details
-                </button>
-              </div>
+              <div className='w-full flex justify-center items-center'></div>
             </div>
           </div>
         </div>
-        <div className='bg-gray-50 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col '>
-          <h3 className='text-xl font-semibold leading-5 text-gray-800'>
+        <div className='customer'>
+          <h3 className='customer-title'>
             Customer
           </h3>
-          <div className='flex  flex-col md:flex-row xl:flex-col justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-8 xl:space-x-0 '>
+          <div className='customer-card'>
             <div className='flex flex-col justify-start items-start flex-shrink-0'>
-              <div className='flex justify-center  w-full  md:justify-start items-center space-x-4 py-8 border-b border-gray-200'>
+              <div className='customer-card-wrapper'>
                 <img
                   src='https://i.ibb.co/5TSg7f6/Rectangle-18.png'
                   alt='avatar'
@@ -194,7 +184,7 @@ const Order = () => {
                 </div>
               </div>
 
-              <div className='flex justify-center  md:justify-start items-center space-x-4 py-4 border-b border-gray-200 w-full'>
+              <div className='customer-email'>
                 <svg
                   width='24'
                   height='24'
@@ -215,26 +205,26 @@ const Order = () => {
                     strokeLinejoin='round'
                   />
                 </svg>
-                <p className='cursor-pointer text-sm leading-5 text-gray-800'>
-                {userInfo.email}
+                <p className='customer-email-text'>
+                  {userInfo.email}
                 </p>
               </div>
             </div>
-            <div className='flex justify-between xl:h-full  items-stretch w-full flex-col mt-6 md:mt-0'>
-              <div className='flex justify-center md:justify-start xl:flex-col flex-col md:space-x-6 lg:space-x-8 xl:space-x-0 space-y-4 xl:space-y-12 md:space-y-0 md:flex-row  items-center md:items-start '>
-                <div className='flex justify-center md:justify-start  items-center md:items-start flex-col space-y-4 xl:mt-8'>
-                  <p className='text-base font-semibold leading-4 text-center md:text-left text-gray-800'>
+            <div className='customer-address'>
+              <div className='customer-address-wrapper'>
+                <div className='customer-address-wrapper-shipping'>
+                  <p className='customer-address-wrapper-shipping-text'>
                     Shipping Address
                   </p>
-                  <p className='w-48 lg:w-full xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600'>
+                  <p className='customer-address-wrapper-shipping-value'>
                     {order?.shippingAddress?.address}
                   </p>
                 </div>
-                <div className='flex justify-center md:justify-start  items-center md:items-start flex-col space-y-4 '>
-                  <p className='text-base font-semibold leading-4 text-center md:text-left text-gray-800'>
+                <div className='customer-address-wrapper-shipping'>
+                  <p className='customer-address-wrapper-shipping-text'>
                     Billing Address
                   </p>
-                  <p className='w-48 lg:w-full xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600'>
+                  <p className='customer-address-wrapper-shipping-value'>
                     {order?.shippingAddress?.address}
                   </p>
                 </div>

@@ -163,7 +163,7 @@ const PlaceOrder = () => {
                   Total
                 </p>
                 <p className='text-base font-semibold leading-4 text-gray-600'>
-                  $36.00
+                {totalPrice()}
                 </p>
               </div>
             </div>
@@ -182,22 +182,19 @@ const PlaceOrder = () => {
                   </div>
                   <div className='flex flex-col justify-start items-center'>
                     <p className='text-lg leading-6 font-semibold text-gray-800'>
-                      DPD Delivery
+                      JNT Express
                       <br />
                       <span className='font-normal'>
-                        Delivery with 24 Hours
+                        Delivery with 3 Days Maximum
                       </span>
                     </p>
                   </div>
                 </div>
                 <p className='text-lg font-semibold leading-6 text-gray-800'>
-                  $8.00
+                  Rp. 0
                 </p>
               </div>
               <div className='w-full flex justify-center items-center'>
-                <button className='hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-5 w-96 md:w-full bg-gray-800 text-base font-medium leading-4 text-white'>
-                  View Carrier Details
-                </button>
               </div>
             </div>
           </div>
