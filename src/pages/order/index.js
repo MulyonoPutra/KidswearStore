@@ -1,11 +1,12 @@
 import './order.scss';
-
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { detailsOrder } from './../../config/redux/action/order.action';
 import Moment from 'react-moment';
-import { Alert } from 'components';
+import { Alert, Loading } from 'components';
+import axios from 'axios';
+import { PayPalButton } from 'react-paypal-button-v2';
 
 const Order = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const Order = () => {
   const [items, setItems] = useState({});
 
   const { userInfo } = userSignin;
+
+  const [sdkReady, setSdkReady] = useState(false);
 
   useEffect(() => {
     order?.orderItems?.map((item) => {
@@ -41,8 +44,34 @@ const Order = () => {
   }, [items.shippingAddress, order?.orderItems]);
 
   useEffect(() => {
-    dispatch(detailsOrder(orderId));
-  }, [dispatch, orderId]);
+    const addPayPalScript = async () => {
+      const { data } = await axios.get('/v1/config/paypal');
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+    if (!order?._id) {
+      dispatch(detailsOrder(orderId));
+    } else {
+      if (!order.isPaid) {
+        if (!window.paypal) {
+          addPayPalScript();
+        } else {
+          setSdkReady(true);
+        }
+      }
+    }
+  }, [dispatch, order?._id, order?.isPaid, orderId]);
+
+  const successPaymentHandler = () => {
+    // TODO: do something
+    console.log(`Success Payment!`);
+  };
 
   return (
     <div className='py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto'>
@@ -128,6 +157,26 @@ const Order = () => {
                   Rp. {items.qty * items.price}
                 </p>
               </div>
+              {!order?.isPaid && (
+                <div>
+                  {!sdkReady ? (
+                    <Loading />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  )}
+                </div>
+              )}
+              {/* <div className='flex w-full justify-center items-center md:justify-start md:items-start'>
+                <button
+                  className='mt-6 md:mt-0 py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base leading-4 text-gray-800'
+                  type='button'
+                >
+                  Payment
+                </button>
+              </div> */}
             </div>
             <div className='order-items-shipping'>
               <h3 className='text-xl font-semibold leading-5 text-gray-800'>
@@ -156,10 +205,19 @@ const Order = () => {
                   Rp. 0
                 </p>
               </div>
-              {
-                order?.isDelivered ? (<Alert condition={order?.isDelivered} title='Not Delivered' messages='Please finish your payment.'/>)
-                : (<Alert condition={order?.isDelivered} title='Not Delivered' messages='Please finish your payment.'/>)
-              }
+              {order?.isDelivered ? (
+                <Alert
+                  condition={order?.isDelivered}
+                  title='Not Delivered'
+                  messages='Please finish your payment.'
+                />
+              ) : (
+                <Alert
+                  condition={order?.isDelivered}
+                  title='Not Delivered'
+                  messages='Please finish your payment.'
+                />
+              )}
               <div className='flex justify-between items-start w-full border-gray-200 border-b pb-4'>
                 <div className='flex justify-center items-center space-x-4'>
                   <div className='w-8 h-8'>
@@ -177,11 +235,19 @@ const Order = () => {
                   </div>
                 </div>
               </div>
-              {
-                order?.isPaid ? (<Alert condition={order?.isPaid} title='Not Paid' messages='Please finish your payment.'/>)
-                : (<Alert condition={order?.isPaid} title='Not Paid' messages='Please finish your payment.'/>)
-              }
-              
+              {order?.isPaid ? (
+                <Alert
+                  condition={order?.isPaid}
+                  title='Not Paid'
+                  messages='Please finish your payment.'
+                />
+              ) : (
+                <Alert
+                  condition={order?.isPaid}
+                  title='Not Paid'
+                  messages='Please finish your payment.'
+                />
+              )}
             </div>
           </div>
         </div>
