@@ -24,6 +24,7 @@ const PlaceOrder = () => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
 
+
   useEffect(() => {
     cartItems.map((item) => {
       return setItems({
@@ -49,7 +50,6 @@ const PlaceOrder = () => {
 
   useEffect(() => {
     if (success) {
-      console.log('success create new order!!');
       navigate(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
@@ -72,13 +72,7 @@ const PlaceOrder = () => {
   };
 
   return (
-    <div className='py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto'>
-      <div className='flex justify-start item-start space-y-2 flex-col '>
-        <h1 className='order-items-text-lg'>Order #13432</h1>
-        <p className='text-base font-medium leading-6 text-gray-600'>
-          21st Mart 2021 at 10:34 PM
-        </p>
-      </div>
+    <div className='py-2 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto'>
       <div className='wrapper'>
         <div className='order-items-wrapper'>
           <div className='order-items-card'>

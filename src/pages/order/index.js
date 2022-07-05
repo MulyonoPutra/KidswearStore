@@ -9,9 +9,9 @@ import { Alert, Loading } from 'components';
 import { PayPalButton } from 'react-paypal-button-v2';
 
 import Moment from 'react-moment';
+import NumberFormat from 'react-number-format';
 
 const Order = () => {
-  
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
@@ -81,7 +81,7 @@ const Order = () => {
   return (
     <div className='py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto'>
       <div className='flex justify-start item-start space-y-2 flex-col '>
-        <h1 className='order-items-text-lg'>Order #{order?._id}</h1>
+        <h1 className='order-items-text-lg font-semibold'>Order ID: #{order?._id}</h1>
         <p className='text-base font-medium leading-6 text-gray-600'>
           <Moment format='LLLL' date={order?.createdAt} />
         </p>
@@ -119,17 +119,32 @@ const Order = () => {
                 </div>
                 <div className='flex justify-between space-x-8 items-start w-full'>
                   <p className='text-base xl:text-lg leading-6'>
-                    {items.price}{' '}
+                    <NumberFormat
+                      value={items.price}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'Rp.'}
+                    />{' '}
                     <span className='text-red-300 line-through'>
                       {' '}
-                      {items.price}
+                      <NumberFormat
+                        value={items.price}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        prefix={'Rp.'}
+                      />
                     </span>
                   </p>
                   <p className='text-base xl:text-lg leading-6 text-gray-800'>
                     {items.qty}
                   </p>
                   <p className='text-base xl:text-lg font-semibold leading-6 text-gray-800'>
-                    {items.price}
+                    <NumberFormat
+                      value={items.price}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'Rp.'}
+                    />
                   </p>
                 </div>
               </div>
@@ -146,7 +161,12 @@ const Order = () => {
                 <div className='flex justify-between  w-full'>
                   <p className='text-base leading-4 text-gray-800'>Subtotal</p>
                   <p className='text-base leading-4 text-gray-600'>
-                    Rp. {items.qty * items.price}
+                    <NumberFormat
+                      value={items.qty * items.price}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'Rp.'}
+                    />
                   </p>
                 </div>
                 <div className='flex justify-between items-center w-full'>
@@ -159,7 +179,12 @@ const Order = () => {
                   Total
                 </p>
                 <p className='text-base font-semibold leading-4 text-gray-600'>
-                  Rp. {items.qty * items.price}
+                <NumberFormat
+                      value={items.qty * items.price}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                      prefix={'Rp.'}
+                    />
                 </p>
               </div>
               {!order?.isPaid && (

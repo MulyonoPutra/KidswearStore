@@ -27,6 +27,7 @@
         }
 
         &-shipping {
+            height: 450px;
             @apply flex flex-col justify-center px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6;
         }
     }
@@ -36,6 +37,7 @@
     }
 
     .customer {
+        height: 450px;
         @apply bg-gray-50 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col;
 
         &-title {
