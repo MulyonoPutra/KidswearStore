@@ -24,7 +24,6 @@ const PlaceOrder = () => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
 
-
   useEffect(() => {
     cartItems.map((item) => {
       return setItems({
@@ -92,9 +91,7 @@ const PlaceOrder = () => {
               </div>
               <div className='card-list'>
                 <div className='card-list-wrapper'>
-                  <h3 className='card-list-name'>
-                    {items.name}
-                  </h3>
+                  <h3 className='card-list-name'>{items.name}</h3>
                   <div className='flex justify-start items-start flex-col space-y-2'>
                     <p className='text-sm leading-none text-gray-800'>
                       <span className='text-gray-300'>Style: </span> Italic
@@ -142,9 +139,7 @@ const PlaceOrder = () => {
           </div>
           <div className='summary'>
             <div className='summary-wrapper'>
-              <h3 className='summary-title'>
-                Summary
-              </h3>
+              <h3 className='summary-title'>Summary</h3>
               <div className='summary-card'>
                 <div className='flex justify-between w-full'>
                   <p className='summary-text-normal'>Subtotal</p>
@@ -163,9 +158,7 @@ const PlaceOrder = () => {
                 </div>
               </div>
               <div className='flex justify-between items-center w-full'>
-                <p className='summary-text-bold-normal'>
-                  Total
-                </p>
+                <p className='summary-text-bold-normal'>Total</p>
                 <p className='summary-text-bold-sm'>
                   <NumberFormat
                     value={totalPrice()}
@@ -210,9 +203,7 @@ const PlaceOrder = () => {
         </div>
 
         <div className='customer'>
-          <h3 className='customer-title'>
-            Customer
-          </h3>
+          <h3 className='customer-title'>Customer</h3>
           <div className='customer-wrapper'>
             <div className='customer-list'>
               <div className='customer-list-wrapper'>
@@ -221,9 +212,7 @@ const PlaceOrder = () => {
                   alt='avatar'
                 />
                 <div className='customer-name'>
-                  <p className='customer-name-text'>
-                    {userInfo.name}
-                  </p>
+                  <p className='customer-name-text'>{userInfo.name}</p>
                   <p className='text-sm leading-5 text-gray-600'>
                     10 Previous Orders
                   </p>
@@ -259,24 +248,24 @@ const PlaceOrder = () => {
             <div className='shipping'>
               <div className='shipping-wrapper'>
                 <div className='shipping-address'>
-                  <p className='shipping-address-title'>
-                    Shipping Address
-                  </p>
+                  <p className='shipping-address-title'>Shipping Address</p>
                   <p className='shipping-address-value'>
                     {shippingAddress.address}
                   </p>
                 </div>
                 <div className='shipping-address'>
-                  <p className='shipping-address-title'>
-                    Billing Address
-                  </p>
+                  <p className='shipping-address-title'>Billing Address</p>
                   <p className='shipping-address-value'>
                     {shippingAddress.address}
                   </p>
                 </div>
               </div>
               <div className='place-order-wrapper'>
-                <button className='place-order-btn' onClick={placeOrderHandler} type='button'>
+                <button
+                  className='place-order-btn'
+                  onClick={placeOrderHandler}
+                  type='button'
+                >
                   Place Order
                 </button>
               </div>
