@@ -109,10 +109,7 @@ const Cart = () => {
               </div>
             ))}
 
-            <button
-              className='flex font-semibold text-indigo-600 text-sm mt-10'
-              onClick={() => navigate(-2)}
-            >
+            <button className='flex font-semibold text-indigo-600 text-sm mt-10' onClick={() => navigate(-2)}>
               <svg
                 className='fill-current mr-2 text-indigo-600 w-4'
                 viewBox='0 0 448 512'
@@ -127,7 +124,7 @@ const Cart = () => {
             <h1 className='text-title border-b pb-8'>Order Summary</h1>
             <div className='flex justify-between mt-10 mb-5'>
               <span className='font-semibold text-sm uppercase'>
-                Items {totalItems()}
+                {totalItems()} Items
               </span>
             </div>
             <div>
