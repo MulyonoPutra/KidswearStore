@@ -2,20 +2,28 @@ import './order.scss';
 import axios from 'axios';
 
 import { useParams } from 'react-router-dom';
-import { detailsOrder } from './../../config/redux/action/order.action';
+import {
+  detailsOrder,
+  payOrder,
+} from './../../config/redux/action/order.action';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Loading } from 'components';
 import { PayPalButton } from 'react-paypal-button-v2';
 
 import Moment from 'react-moment';
+import moment from 'moment'
 import NumberFormat from 'react-number-format';
+import { ORDER_PAY_RESET } from 'config/constants/order.constant';
 
 const Order = () => {
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const userSignin = useSelector((state) => state.userSignin);
+  const orderPay = useSelector((state) => state.orderPay);
+
+  const { success: successPay } = orderPay;
   const { order } = orderDetails;
 
   const params = useParams();
@@ -27,6 +35,8 @@ const Order = () => {
   const { userInfo } = userSignin;
 
   const [sdkReady, setSdkReady] = useState(false);
+
+  const paidAt = moment(order?.paidAt).format('LLLL');
 
   useEffect(() => {
     order?.orderItems?.map((item) => {
@@ -60,7 +70,8 @@ const Order = () => {
       document.body.appendChild(script);
     };
 
-    if (!order?._id) {
+    if (!order || successPay || (order && order?._id !== orderId)) {
+      dispatch({type: ORDER_PAY_RESET})
       dispatch(detailsOrder(orderId));
     } else {
       if (!order.isPaid) {
@@ -71,17 +82,16 @@ const Order = () => {
         }
       }
     }
-  }, [dispatch, order?._id, order?.isPaid, orderId]);
+  }, [dispatch, order, order?._id, order?.isPaid, orderId, successPay]);
 
-  const successPaymentHandler = () => {
-    // TODO: do something
-    console.log(`Success Payment!`);
+  const successPaymentHandler = (paymentResult) => {
+    dispatch(payOrder(order, paymentResult));
   };
 
   return (
     <div className='py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto'>
       <div className='flex justify-start item-start space-y-2 flex-col '>
-        <h1 className='order-items-text-lg font-semibold'>Order ID: #{order?._id}</h1>
+        <h1 className='font-semibold'>Order ID: #{order?._id}</h1>
         <p className='text-base font-medium leading-6 text-gray-600'>
           <Moment format='LLLL' date={order?.createdAt} />
         </p>
@@ -179,12 +189,12 @@ const Order = () => {
                   Total
                 </p>
                 <p className='text-base font-semibold leading-4 text-gray-600'>
-                <NumberFormat
-                      value={items.qty * items.price}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                      prefix={'Rp.'}
-                    />
+                  <NumberFormat
+                    value={items.qty * items.price}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'Rp.'}
+                  />
                 </p>
               </div>
               {!order?.isPaid && (
@@ -192,10 +202,12 @@ const Order = () => {
                   {!sdkReady ? (
                     <Loading />
                   ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
+                    <>
+                      <PayPalButton
+                        amount={order?.totalPrice}
+                        onSuccess={successPaymentHandler}
+                      />
+                    </>
                   )}
                 </div>
               )}
@@ -260,8 +272,8 @@ const Order = () => {
               {order?.isPaid ? (
                 <Alert
                   condition={order?.isPaid}
-                  title='Not Paid'
-                  messages='Please finish your payment.'
+                  title='Paid'
+                  messages={`Successful payment at ${paidAt}`}
                 />
               ) : (
                 <Alert
