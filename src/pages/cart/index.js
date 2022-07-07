@@ -2,12 +2,10 @@ import './cart.scss';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  addToCart,
-  removeFromCart,
-} from '../../config/redux/action/cart.action';
+import { addToCart, removeFromCart } from '../../config/redux/action/cart.action';
 import { useSelector } from 'react-redux';
 import NumberFormat from 'react-number-format';
+import { ReactComponent as BackIcon } from '../../assets/icons/back.svg';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -21,6 +19,7 @@ const Cart = () => {
   const qty = qtyInUrl ? Number(qtyInUrl) : 1;
 
   const cart = useSelector((state) => state.cart);
+
   const { cartItems } = cart;
 
   useEffect(() => {
@@ -69,13 +68,13 @@ const Cart = () => {
                   <div className='flex flex-col justify-between ml-4 flex-grow'>
                     <span className='font-bold text-sm'>{item.name}</span>
                     <span className='text-red-500 text-xs'>{item.name}</span>
-                    <a
-                      href='!#'
+                    <button
+                      type='button'
                       className='text-remove'
                       onClick={() => removeFromCartHandler(item.product)}
                     >
                       Remove
-                    </a>
+                    </button>
                   </div>
                 </li>
                 <select
@@ -109,28 +108,23 @@ const Cart = () => {
               </div>
             ))}
 
-            <button className='flex font-semibold text-indigo-600 text-sm mt-10' onClick={() => navigate(-2)}>
-              <svg
-                className='fill-current mr-2 text-indigo-600 w-4'
-                viewBox='0 0 448 512'
-              >
-                <path d='M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z' />
-              </svg>
+            <button className='btn-back' onClick={() => navigate(-2)}>
+              <div className='fill-current mr-2 text-indigo-600 w-4'>
+                <BackIcon />
+              </div>
               Continue Shopping
             </button>
           </div>
 
           <div id='summary' className='w-1/4 px-8 py-10'>
-            <h1 className='text-title border-b pb-8'>Order Summary</h1>
+            <h1 className='text-order-summary'>Order Summary</h1>
             <div className='flex justify-between mt-10 mb-5'>
               <span className='font-semibold text-sm uppercase'>
                 {totalItems()} Items
               </span>
             </div>
             <div>
-              <label className='font-medium inline-block mb-3 text-sm uppercase'>
-                Shipping
-              </label>
+              <label className='text-label'>Shipping</label>
               <select className='block p-2 text-gray-600 w-full text-sm'>
                 <option>Free Shipping - Rp. 0</option>
               </select>

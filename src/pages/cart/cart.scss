@@ -17,6 +17,10 @@
     &-remove {
         @apply font-semibold hover:text-red-500 text-gray-500 text-xs;
     }
+
+    &-back {
+        @apply flex font-semibold text-indigo-600 text-sm mt-10;
+    }
 }
 
 .text {
@@ -43,12 +47,20 @@
     }
 
     &-remove {
-        @apply font-semibold hover:text-red-500 text-gray-500 text-xs;
+        @apply font-semibold hover:text-red-500 text-gray-500 text-xs grid justify-items-start;
     }
 
     &-value {
         width: 23%;
         @apply text-center font-semibold text-sm;
+    }
+
+    &-label {
+        @apply font-medium inline-block mb-3 text-sm uppercase
+    }
+
+    &-order-summary {
+        @apply text-title border-b pb-8;
     }
 }
 

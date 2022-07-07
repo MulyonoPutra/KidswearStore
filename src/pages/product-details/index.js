@@ -66,12 +66,12 @@ const ProductDetails = () => {
               <div className='lg:w-4/5 mx-auto flex flex-wrap'>
                 <img
                   alt='Product Images'
-                  className='lg:w-1/2 w-full object-cover object-center rounded border border-gray-200'
+                  className='product-images'
                   src={product.image}
                 />
                 <div className='flex justify-center ml-3'>
                   <div className='card'>
-                    <h5 className='text-gray-900 text-xl leading-tight font-medium mb-2'>
+                    <h5 className='product-name'>
                       {product.name}
                     </h5>
 
@@ -81,50 +81,12 @@ const ProductDetails = () => {
                         numReviews={product.numReviews}
                         className='flex items-center'
                       ></Rating>
-                      <span className='flex ml-3 pl-3 py-2 border-l-2 border-gray-200'>
-                        <a href='!#' className='text-gray-500'>
-                          <svg
-                            fill='currentColor'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            strokeWidth={2}
-                            className='w-5 h-5'
-                            viewBox='0 0 24 24'
-                          >
-                            <path d='M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' />
-                          </svg>
-                        </a>
-                        <a href='!#' className='ml-2 text-gray-500'>
-                          <svg
-                            fill='currentColor'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            strokeWidth={2}
-                            className='w-5 h-5'
-                            viewBox='0 0 24 24'
-                          >
-                            <path d='M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z' />
-                          </svg>
-                        </a>
-                        <a href='!#' className='ml-2 text-gray-500'>
-                          <svg
-                            fill='currentColor'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            strokeWidth={2}
-                            className='w-5 h-5'
-                            viewBox='0 0 24 24'
-                          >
-                            <path d='M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z' />
-                          </svg>
-                        </a>
-                      </span>
                     </div>
-                    <p className='leading-relaxed text-gray-300'>
+                    <p className='product-description'>
                       {product.description}
                     </p>
                     <Divider />
-                    <p className='leading-relaxed text-green-600'>
+                    <p className='product-stock'>
                       {quantityStock()}
                     </p>
                     <span className='text-price'>
@@ -148,7 +110,7 @@ const ProductDetails = () => {
                         <span className='mr-3'>Size</span>
                         <div className='relative'>
                           <select
-                            className='rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10'
+                            className='product-dropdown'
                             onChange={selected}
                             value={selectedSize}
                           >
@@ -191,7 +153,7 @@ const ProductDetails = () => {
                             <input
                               id='counter'
                               aria-label='input'
-                              className='border border-gray-300 text-center w-14 pb-1 h-10'
+                              className='product-input'
                               type='text'
                               value={qty}
                               onChange={(e) => {
@@ -225,7 +187,7 @@ const ProductDetails = () => {
                         />
                       </div>
                       <div>
-                        <p className='leading-relaxed text-green-600 text-sm mb-2'>
+                        <p className='product-notes'>
                           Add Notes
                         </p>
                       </div>
@@ -236,7 +198,7 @@ const ProductDetails = () => {
                           id='about'
                           name='about'
                           rows={3}
-                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md'
+                          className='product-text-area'
                           placeholder='Add your notes here..'
                           defaultValue={''}
                         />
