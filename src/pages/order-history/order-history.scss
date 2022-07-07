@@ -1,0 +1,41 @@
+.order-history {
+    @apply w-full sm:px-6;
+    .heading {
+        @apply px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg;
+
+        &-wrapper {
+            @apply sm:flex items-center justify-between;
+        }
+        &-text {
+            @apply text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800;
+        }
+    }
+
+    .data-table {
+        @apply bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto;
+
+        &-wrapper {
+            @apply w-full whitespace-nowrap;
+        }
+
+        &-tr-title {
+            @apply h-16 w-full text-sm leading-none text-gray-800;
+        }
+
+        &-tr-value {
+            @apply h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100;
+        }
+
+        &-text {
+            @apply text-xs leading-3 text-gray-600 mt-2;
+        }
+    }
+
+    .btn {
+        @apply inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded;
+
+        &-text {
+            @apply text-sm font-medium leading-none text-white;
+        }
+    }
+}

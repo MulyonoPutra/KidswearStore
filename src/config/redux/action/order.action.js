@@ -10,6 +10,9 @@ import {
   ORDER_PAY_REQUEST,
   ORDER_PAY_FAIL,
   ORDER_PAY_SUCCESS,
+  ORDER_HISTORY_REQUEST,
+  ORDER_HISTORY_FAILED,
+  ORDER_HISTORY_SUCCESS,
 } from './../../constants/order.constant';
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -56,7 +59,8 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
   }
 };
 
-export const payOrder = (order, paymentResult) => async (dispatch, getState) => {
+export const payOrder =
+  (order, paymentResult) => async (dispatch, getState) => {
     dispatch({ type: ORDER_PAY_REQUEST, payload: { order, paymentResult } });
     const {
       userSignin: { userInfo },
@@ -77,3 +81,26 @@ export const payOrder = (order, paymentResult) => async (dispatch, getState) => 
       });
     }
   };
+
+export const listOrderHistory = () => async (dispatch, getState) => {
+  dispatch({ type: ORDER_HISTORY_REQUEST });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = await axios.get('/v1/orders/mine', {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    dispatch({ type: ORDER_HISTORY_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: ORDER_HISTORY_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

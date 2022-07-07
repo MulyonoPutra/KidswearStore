@@ -3,7 +3,7 @@ import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { solutions, resources } from 'utils/header.collection';
 import './header.scss';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import KidsLogo from 'assets/images/kids.png';
 import HeaderTitle from 'assets/images/banner-text.png';
@@ -21,7 +21,7 @@ const Header = () => {
   const { userInfo } = userSignin;
 
   const dispatch = useDispatch();
-  
+
   const signoutHandler = () => {
     dispatch(signout());
   };
@@ -72,9 +72,15 @@ const Header = () => {
             {userInfo ? (
               <div className='dropdown'>
                 <Link to='#' className='text-indigo-700'>
-                  {userInfo.name} 
+                  {userInfo.name}
                 </Link>
                 <ul className='dropdown-content'>
+                  <li>
+                    <Link to='/order-history'>
+                      Order History
+                    </Link>
+                  </li>
+                  <br />
                   <li>
                     <Link to='#signout' onClick={signoutHandler}>
                       Sign Out
