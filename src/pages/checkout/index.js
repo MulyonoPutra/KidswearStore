@@ -7,7 +7,6 @@ import { saveShippingAddress } from './../../config/redux/action/cart.action';
 import { useEffect } from 'react';
 
 const Checkout = () => {
-  
   const cart = useSelector((state) => state.cart);
   const { cartItems, shippingAddress } = cart;
 
@@ -55,29 +54,22 @@ const Checkout = () => {
 
   return (
     <div className='overflow-y-hidden'>
-      <div className='flex justify-center items-center 2xl:container 2xl:mx-auto lg:py-16 md:py-12 py-9 px-4 md:px-6 lg:px-20 xl:px-44 '>
-        <div className='flex w-full sm:w-9/12 lg:w-full flex-col lg:flex-row justify-center items-center lg:space-x-10 2xl:space-x-36 space-y-12 lg:space-y-0'>
-          <div className='flex w-full flex-col justify-start items-start'>
+      <div className='containers'>
+        <div className='containers-wrapper'>
+          <div className='containers-shipping'>
             <div>
-              <p className='text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800'>
-                Check out
-              </p>
+              <p className='containers-shipping-title'>Check out</p>
             </div>
             <div className='mt-2'>
-              <Link
-                to={'/cart'}
-                className='text-base leading-4 underline  hover:text-gray-800 text-gray-600'
-              >
+              <Link to={'/cart'} className='containers-shipping-back'>
                 Back to Cart
               </Link>
             </div>
             <div className='mt-12'>
-              <p className='text-xl font-semibold leading-5 text-gray-800'>
-                Shipping Details
-              </p>
+              <p className='containers-shipping-title-sm'>Shipping Details</p>
             </div>
             <form className='form-w-full'>
-              <div className='mt-8 flex flex-col justify-start items-start w-full space-y-8 '>
+              <div className='containers-forms'>
                 <input
                   className='form-w-full'
                   type='text'
@@ -106,28 +98,13 @@ const Checkout = () => {
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
                 />
-                {/* <div className='flex justify-between flex-col sm:flex-row w-full items-start space-y-8 sm:space-y-0 sm:space-x-8'>
-                <div className='w-full'>
-                  <Select
-                  classNamePrefix='filter'
-                    placeholder='Select Option'
-                    value={selectedOption} // set selected value
-                    options={data} // set list of the data
-                    onChange={handleChange} // assign onChange function
-                  />
-                </div>
-              </div> */}
-                <div className='flex justify-between flex-col sm:flex-row w-full items-start space-y-8 sm:space-y-0 sm:space-x-8'>
-                  <div className='w-full'>
-                    <input
-                      className='form-w-full'
-                      type='text'
-                      placeholder='Country'
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                    />
-                  </div>
-                </div>
+                <input
+                  className='form-w-full'
+                  type='text'
+                  placeholder='Country'
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
                 <input
                   className='form-w-full'
                   type='text'
@@ -147,7 +124,7 @@ const Checkout = () => {
           </div>
           <div className='order-summary-wrapper'>
             <div>
-              <h1 className='text-2xl font-semibold leading-6 text-gray-800'>
+              <h1 className='containers-shipping-title-sm-2'>
                 Order Summary
               </h1>
             </div>

@@ -52,3 +52,35 @@
         @apply text-xl font-semibold leading-4 text-gray-800;
     }
 }
+
+.containers {
+    @apply flex justify-center items-center 2xl:container 2xl:mx-auto lg:py-16 md:py-12 py-9 px-4 md:px-6 lg:px-20 xl:px-44;
+
+    &-wrapper {
+        @apply flex w-full sm:w-9/12 lg:w-full flex-col lg:flex-row justify-center items-center lg:space-x-10 2xl:space-x-36 space-y-12 lg:space-y-0;
+    }
+
+    &-shipping {
+        @apply flex w-full flex-col justify-start items-start;
+
+        &-title {
+            @apply text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800;
+
+            &-sm {
+                @apply text-xl font-semibold leading-5 text-gray-800;
+            }
+
+            &-sm-2 {
+                @apply text-2xl font-semibold leading-6 text-gray-800;
+            }
+        }
+
+        &-back {
+            @apply text-base leading-4 underline  hover:text-gray-800 text-gray-600;
+        }
+    }
+
+    &-forms {
+        @apply mt-8 flex flex-col justify-start items-start w-full space-y-8;
+    }
+}
