@@ -183,6 +183,15 @@ const Order = () => {
                   <p className='text-base leading-4 text-gray-800'>Shipping</p>
                   <p className='text-base leading-4 text-gray-600'>Rp. 0</p>
                 </div>
+                <div className='flex justify-between items-center w-full'>
+                  <p className='text-base leading-4 text-gray-800'>Tax</p>
+                  <p className='text-base leading-4 text-gray-600'> <NumberFormat
+                    value={order?.taxPrice}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'Rp.'}
+                  /></p>
+                </div>
               </div>
               <div className='flex justify-between items-center w-full'>
                 <p className='text-base font-semibold leading-4 text-gray-800'>
@@ -297,9 +306,6 @@ const Order = () => {
                 <div className=' flex justify-start items-start flex-col space-y-2'>
                   <p className='text-base font-semibold leading-4 text-left text-gray-800'>
                     {userInfo.name}
-                  </p>
-                  <p className='text-sm leading-5 text-gray-600'>
-                    10 Previous Orders
                   </p>
                 </div>
               </div>

@@ -72,13 +72,13 @@
 
     .customer {
         @apply bg-gray-50 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col;
-
+       
         &-title {
-            @apply text-xl font-semibold leading-5 text-gray-800;
+            @apply text-xl font-semibold leading-5 text-red-800;
         }
 
         &-wrapper {
-            @apply flex flex-col md:flex-row xl:flex-col justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-8 xl:space-x-0;
+            @apply flex flex-col md:flex-row xl:flex-col justify-start items-stretch  w-full md:space-x-6 lg:space-x-8 xl:space-x-0;
         }
 
         &-list {
@@ -124,11 +124,11 @@
 
     .place-order {
         &-wrapper {
-            @apply flex w-full justify-center items-center md:justify-start md:items-start;
+            @apply flex w-full justify-center items-center md:justify-start md:items-start mt-12;
         }
 
         &-btn {
-            @apply mt-6 md:mt-0 py-5 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-medium w-96 2xl:w-full text-base leading-4 text-gray-800;
+            @apply md:mt-0 py-5 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-800 border border-white font-medium w-full 2xl:w-full text-base leading-4 text-white;
         }
         
     }

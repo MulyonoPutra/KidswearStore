@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import './place-order.scss';
 import { createOrder } from './../../config/redux/action/order.action';
 import { ORDER_CREATE_RESET } from 'config/constants/order.constant';
-
+import './place-order.scss';
 import NumberFormat from 'react-number-format';
+import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 
 const PlaceOrder = () => {
   const dispatch = useDispatch();
@@ -213,33 +214,11 @@ const PlaceOrder = () => {
                 />
                 <div className='customer-name'>
                   <p className='customer-name-text'>{userInfo.name}</p>
-                  <p className='text-sm leading-5 text-gray-600'>
-                    10 Previous Orders
-                  </p>
                 </div>
               </div>
 
               <div className='customer-logo'>
-                <svg
-                  width='24'
-                  height='24'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path
-                    d='M19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5Z'
-                    stroke='#1F2937'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  />
-                  <path
-                    d='M3 7L12 13L21 7'
-                    stroke='#1F2937'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  />
-                </svg>
+                <EmailIcon />
                 <p className='cursor-pointer text-sm leading-5 text-gray-800'>
                   {userInfo.email}
                 </p>
@@ -260,15 +239,15 @@ const PlaceOrder = () => {
                   </p>
                 </div>
               </div>
-              <div className='place-order-wrapper'>
-                <button
-                  className='place-order-btn'
-                  onClick={placeOrderHandler}
-                  type='button'
-                >
-                  Place Order
-                </button>
-              </div>
+            </div>
+            <div className='place-order-wrapper'>
+              <button
+                className='place-order-btn'
+                onClick={placeOrderHandler}
+                type='button'
+              >
+                Place Order
+              </button>
             </div>
           </div>
         </div>
