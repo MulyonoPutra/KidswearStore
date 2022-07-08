@@ -1,13 +1,15 @@
-import './product-details.scss';
-import { findById } from 'config/redux/action/product.action';
+import { ErrorToast, Loading, Divider, Rating } from 'components';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { ErrorToast, Loading, Divider, Rating } from 'components';
-import MinusIcon from 'assets/icons/minus.svg';
-import PlusIcon from 'assets/icons/plus.svg';
-import PencilIcon from 'assets/icons/pencil.svg';
 import NumberFormat from 'react-number-format';
+
+import { findById } from 'config/redux/action/product.action';
+import MinusIcon from 'assets/icons/minus.svg';
+import PencilIcon from 'assets/icons/pencil.svg';
+import PlusIcon from 'assets/icons/plus.svg';
+
+import './product-details.scss';
 
 const ProductDetails = () => {
 

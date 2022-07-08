@@ -1,9 +1,11 @@
-import './payment.scss';
-import { useState, useEffect } from 'react';
 import { LoginButton } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
 import { savePaymentMethod } from 'config/redux/action/cart.action';
+
+import './payment.scss';
 
 const Payment = () => {
   const [paymentMethod, setPaymentMethod] = useState('PayPal');

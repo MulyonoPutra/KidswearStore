@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import './product-list.scss';
 import NumberFormat from 'react-number-format';
+
+import './product-list.scss';
 
 const ProductList = (props) => {
   const { id, image, name, price, href, color } = props;

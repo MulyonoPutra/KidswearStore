@@ -1,8 +1,10 @@
 import { ErrorToast, Loading } from 'components';
-import { findAllProducts } from 'config/redux/action/product.action';
-import ProductList from 'pages/product-list';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import ProductList from 'pages/product-list';
+
+import { findAllProducts } from 'config/redux/action/product.action';
+
 import './home.scss';
 
 const Home = () => {

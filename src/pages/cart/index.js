@@ -1,10 +1,11 @@
-import './cart.scss';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addToCart, removeFromCart } from '../../config/redux/action/cart.action';
+import { useEffect } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import NumberFormat from 'react-number-format';
+
+import './cart.scss';
+import { addToCart, removeFromCart } from '../../config/redux/action/cart.action';
 import { ReactComponent as BackIcon } from '../../assets/icons/back.svg';
 
 const Cart = () => {

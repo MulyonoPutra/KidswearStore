@@ -1,12 +1,14 @@
-import './order-history.scss';
-import { listOrderHistory } from 'config/redux/action/order.action';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Moment from 'react-moment';
+import NumberFormat from 'react-number-format';
+
+import { listOrderHistory } from 'config/redux/action/order.action';
+
+import './order-history.scss';
 import CheckedIcon from '../../assets/icons/png/checked.png';
 import CrossIcon from '../../assets/icons/png/cross.png';
-import NumberFormat from 'react-number-format';
-import Moment from 'react-moment';
-import { useNavigate } from 'react-router-dom';
 
 const OrderHistory = () => {
   const navigate = useNavigate();

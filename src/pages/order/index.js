@@ -1,7 +1,8 @@
-import './order.scss';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import { useParams } from 'react-router-dom';
+import './order.scss';
+
 import {
   detailsOrder,
   payOrder,

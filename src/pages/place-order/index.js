@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import NumberFormat from 'react-number-format';
+
+import { ORDER_CREATE_RESET } from 'config/constants/order.constant';
+
+import './place-order.scss';
 import './place-order.scss';
 import { createOrder } from './../../config/redux/action/order.action';
-import { ORDER_CREATE_RESET } from 'config/constants/order.constant';
-import './place-order.scss';
-import NumberFormat from 'react-number-format';
 import { ReactComponent as EmailIcon } from '../../assets/icons/email.svg';
 
 const PlaceOrder = () => {

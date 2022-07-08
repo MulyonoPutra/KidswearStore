@@ -1,10 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
-import './checkout.scss';
-import { useSelector, useDispatch } from 'react-redux';
-import NumberFormat from 'react-number-format';
-import { useState } from 'react';
-import { saveShippingAddress } from './../../config/redux/action/cart.action';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
+import NumberFormat from 'react-number-format';
+
+import './checkout.scss';
+import { saveShippingAddress } from './../../config/redux/action/cart.action';
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cart);
