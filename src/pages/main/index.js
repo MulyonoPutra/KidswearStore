@@ -10,6 +10,7 @@ import Payment from './../payment/index';
 import PlaceOrder from './../place-order/index';
 import Order from './../order/index';
 import OrderHistory from './../order-history/index'
+import Profile from './../profile/index'
 
 const Main = () => {
   return (
@@ -24,6 +25,7 @@ const Main = () => {
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/place-order' element={<PlaceOrder />} />
         <Route path='/order/:id' element={<Order />} />

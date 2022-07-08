@@ -1,0 +1,73 @@
+.form-w-full {
+    @apply px-2 focus:outline-none focus:ring-2 focus:ring-gray-500 border-b border-gray-200 leading-4 text-base placeholder-gray-600 py-4 w-full
+}
+
+.filter {
+    &__control.css-1s2u09g-control {
+        min-height: 58px;
+        @apply focus:outline-none focus:ring-2 focus:ring-gray-500 px-2 border-b border-gray-200 leading-4 text-base placeholder-gray-600 pt-4 pb-3 w-full
+    }
+
+    &__menu {
+        min-height: 58px;
+        line-height: 2rem;
+        border-bottom-width: 1px;
+        margin: 0.125rem auto;
+    }
+
+    &__option {
+
+        background-color: white;
+
+        &--is-focused {
+            background-color: lightblue;
+        }
+    }
+
+    &__group {
+
+        padding: 0;
+    }
+
+    &__menu-portal {
+        border: 1px solid darkblue;
+    }
+}
+
+.btn-proceed {
+    @apply grid place-content-center focus:outline-none focus:ring-gray-500 mt-8 text-base font-medium leading-4 hover:bg-black py-4 md:w-4/12 text-white bg-gray-800
+}
+
+.containers {
+    padding-left: 500px !important;
+    padding-right: 500px !important; 
+    @apply flex justify-center items-center 2xl:container 2xl:mx-auto lg:py-16 md:py-12 py-9 px-4;
+
+    &-wrapper {
+        @apply flex w-full sm:w-9/12 lg:w-full flex-col lg:flex-row justify-center items-center lg:space-x-10 2xl:space-x-36 space-y-12 lg:space-y-0;
+    }
+
+    &-shipping {
+        @apply flex w-full flex-col justify-start items-start;
+
+        &-title {
+            @apply text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800;
+
+            &-sm {
+                @apply text-xl font-semibold leading-5 text-gray-800;
+            }
+
+            &-sm-2 {
+                @apply text-2xl font-semibold leading-6 text-gray-800;
+            }
+        }
+
+        &-back {
+            @apply text-base leading-4 underline  hover:text-gray-800 text-gray-600;
+        }
+    }
+
+    &-forms {
+        @apply mt-8 flex flex-col justify-start items-start w-full space-y-8;
+    }
+}
