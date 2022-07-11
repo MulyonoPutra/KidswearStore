@@ -49,85 +49,71 @@ const Profile = () => {
     }
   };
 
-  const updateConditions = () => {
-    if(loading && loadingUpdate) {
-      return <Loading/>
-    } else if(error && errorUpdate){
-      return <ErrorToast />
-    } else if(successUpdate){
-      return <SuccessToast/>
-    }
-  }
-
   return (
-    (
-      <div>
-        <form className="form" onSubmit={submitHandler}>
-          <div>
-            <h1>User Profile</h1>
+    <div>
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <ErrorToast />
+      ) : (
+        <>
+          {loadingUpdate && <Loading />}
+          {errorUpdate && <ErrorToast />}
+          {successUpdate && <SuccessToast message='Successfully Updated!' />}
+          <div className='overflow-y-hidden'>
+            <div className='containers'>
+              <div className='containers-wrapper'>
+                <div className='containers-shipping'>
+                  <div>
+                    <p className='containers-shipping-title'>Update Profile</p>
+                  </div>
+                  <form className='form-w-full'>
+                    <div className='containers-forms'>
+                      <input
+                        className='form-w-full'
+                        type='text'
+                        placeholder='name'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                      <input
+                        className='form-w-full'
+                        type='text'
+                        placeholder='Phone Number'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                      <input
+                        className='form-w-full'
+                        type='text'
+                        placeholder='Password'
+                        id={password.toString()}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <input
+                        className='form-w-full'
+                        type='text'
+                        placeholder='Confirm Password'
+                        id={confirmPassword.toString()}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                    </div>
+                    <button
+                      className='btn-proceed'
+                      type='submit'
+                      onClick={submitHandler}
+                    >
+                      Update
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-          {loading ? (
-            <Loading/>
-          ) : error ? (
-            <ErrorToast/>
-          ) : (
-            <>
-              {loadingUpdate && <Loading/>}
-              {errorUpdate && (
-                <ErrorToast/>
-              )}
-              {successUpdate && (
-                <SuccessToast message='Successfully Updated!'/>
-              )}
-              <div>
-                <label htmlFor="name">Name</label>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Enter name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor="email">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor="password">Password</label>
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="Enter password"
-                  onChange={(e) => setPassword(e.target.value)}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor="confirmPassword">confirm Password</label>
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="Enter confirm password"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                ></input>
-              </div>
-
-              <div>
-                <label />
-                <button className="primary" type="submit">
-                  Update
-                </button>
-              </div>
-            </>
-          )}
-        </form>
-      </div>
-    ));
+        </>
+      )}
+      ;
+    </div>
+  );
 };
 export default Profile;
