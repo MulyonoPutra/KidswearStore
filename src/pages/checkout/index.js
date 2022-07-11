@@ -54,90 +54,87 @@ const Checkout = () => {
   }, [navigate, userInfo]);
 
   return (
-    <div className='overflow-y-hidden'>
-      <div className='containers'>
-        <div className='containers-wrapper'>
-          <div className='containers-shipping'>
-            <div>
-              <p className='containers-shipping-title'>Check out</p>
-            </div>
+    <div className='shipping'>
+      <div className='shipping-container'>
+        <div className='shipping-container-wrapper'>
+          <div className='shipping-container-wrapper-forms'>
+            <p className='shipping-title'>Check out</p>
             <div className='mt-2'>
               <Link to={'/cart'} className='containers-shipping-back'>
                 Back to Cart
               </Link>
             </div>
             <div className='mt-12'>
-              <p className='containers-shipping-title-sm'>Shipping Details</p>
+              <p className='shipping-subtitle'>Shipping Details</p>
             </div>
-            <form className='form-w-full'>
-              <div className='containers-forms'>
+            <form className='w-full'>
+              <div className='shipping-forms'>
                 <input
-                  className='form-w-full'
+                  className='shipping-forms-input'
                   type='text'
                   placeholder='Fullname'
                   value={fullName}
                   onChange={(e) => setfullName(e.target.value)}
                 />
                 <input
-                  className='form-w-full'
+                  className='shipping-forms-input'
                   type='text'
                   placeholder='Phone Number'
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
                 <input
-                  className='form-w-full'
+                  className='shipping-forms-input'
                   type='text'
                   placeholder='Address'
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
                 <input
-                  className='form-w-full'
+                  className='shipping-forms-input'
+                  type='text'
+                  placeholder='City'
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+                <input
+                  className='shipping-forms-input'
                   type='text'
                   placeholder='Zip Code'
                   value={postalCode}
                   onChange={(e) => setPostalCode(e.target.value)}
                 />
                 <input
-                  className='form-w-full'
-                  type='text'
-                  placeholder='Country'
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                />
-                <input
-                  className='form-w-full'
+                  className='shipping-forms-input'
                   type='text'
                   placeholder='Country'
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                 />
               </div>
-              <button
-                className='btn-proceed'
-                type='submit'
-                onClick={submitHandler}
-              >
-                Proceed to payment
-              </button>
             </form>
+            <button
+              type='submit'
+              onClick={submitHandler}
+              className='shipping-submit-btn'
+            >
+              Proceed to payment
+            </button>
           </div>
-          <div className='order-summary-wrapper'>
+          <div className='shipping-order-summary'>
             <div>
-              <h1 className='containers-shipping-title-sm-2'>
-                Order Summary
-              </h1>
+              <h1 className='shipping-order-summary-title'>Order Summary</h1>
             </div>
-            <div className='flex mt-7 flex-col items-end w-full space-y-6'>
-              <div className='flex justify-between w-full items-center'>
-                <p className='order-summary-text'>Total items</p>
-                <p className='order-summary-value'>{totalItems()}</p>
+            <div className='shipping-order-summary-card'>
+              <div className='shipping-order-summary-card-items'>
+                <p className='text-lg leading-4 text-gray-600'>Total items</p>
+                <p className='shipping-order-summary-card-items-value'>
+                  {totalItems()}
+                </p>
               </div>
-              <div className='flex justify-between w-full items-center'>
-                <p className='order-summary-text'>Total Charges</p>
-                <p className='order-summary-value'>
-                  {' '}
+              <div className='shipping-order-summary-card-items'>
+                <p className='text-lg leading-4 text-gray-600'>Total Charges</p>
+                <p className='shipping-order-summary-card-items-value'>
                   <NumberFormat
                     value={totalPrice()}
                     displayType={'text'}
@@ -146,14 +143,15 @@ const Checkout = () => {
                   />
                 </p>
               </div>
-              <div className='flex justify-between w-full items-center'>
-                <p className='order-summary-text'>Shipping charges</p>
-                <p className='order-summary-value'>Rp. 0</p>
+              <div className='shipping-order-summary-card-items'>
+                <p className='text-lg leading-4 text-gray-600'>
+                  Shipping charges
+                </p>
+                <p className='shipping-order-summary-card-items-value'>Rp. 0</p>
               </div>
-              <div className='flex justify-between w-full items-center'>
-                <p className='order-summary-text'>Sub total </p>
-                <p className='order-summary-value'>
-                  {' '}
+              <div className='shipping-order-summary-card-items'>
+                <p className='text-lg leading-4 text-gray-600'>Sub total </p>
+                <p className='shipping-order-summary-card-items-value'>
                   <NumberFormat
                     value={totalPrice()}
                     displayType={'text'}
@@ -163,10 +161,11 @@ const Checkout = () => {
                 </p>
               </div>
             </div>
-            <div className='flex justify-between w-full items-center mt-32'>
-              <p className='order-summary-total'>Estimated Total </p>
-              <p className='order-summary-total'>
-                {' '}
+            <div className='shipping-order-summary-total'>
+              <p className='shipping-order-summary-total-title'>
+                Estimated Total{' '}
+              </p>
+              <p className='shipping-order-summary-total-value'>
                 <NumberFormat
                   value={totalPrice()}
                   displayType={'text'}
