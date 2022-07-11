@@ -7,7 +7,8 @@ import Rating from './rating';
 import LoginButton from './login-button';
 import Input from './input';
 import Gap from './gap';
-import Alert from './alert/index'
+import Alert from './alert/index';
+import SuccessToast from './success-toast/index';
 
 export {
   DropdownMenu,
@@ -19,5 +20,6 @@ export {
   Input,
   LoginButton,
   Gap,
-  Alert
+  Alert,
+  SuccessToast,
 };

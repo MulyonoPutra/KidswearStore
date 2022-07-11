@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ErrorToast = () => {
+const SuccessToast = ({ message }) => {
   useEffect(() => {
-    toast.error('Something went wrong!', {
+    toast.success(message, {
       position: 'top-right',
       autoClose: 5000,
       hideProgressBar: false,
@@ -21,4 +21,4 @@ const ErrorToast = () => {
     </div>
   );
 };
-export default ErrorToast;
+export default SuccessToast;

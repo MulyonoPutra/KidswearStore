@@ -12,6 +12,7 @@ import PlaceOrder from './../place-order/index';
 import ProductDetails from './../product-details/index';
 import Profile from './../profile/index'
 import Register from './../auth/register/index';
+import PrivateRoute from './../../utils/private-route'
 
 const Main = () => {
   return (
@@ -26,7 +27,9 @@ const Main = () => {
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path="/profile" component={PrivateRoute}>
+          <Route path='/profile' element={<Profile />} />
+        </Route>
         <Route path='/payment' element={<Payment />} />
         <Route path='/place-order' element={<PlaceOrder />} />
         <Route path='/order/:id' element={<Order />} />

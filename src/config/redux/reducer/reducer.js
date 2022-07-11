@@ -5,6 +5,7 @@ import {
   userDetailReducer,
   userRegisterReducer,
   userSigninReducer,
+  userUpdateProfileReducer,
 } from './user.reducer';
 import {
   orderCreateReducer,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   orderDetails: orderDetailReducer,
   orderPay: orderPayReducer,
   orderHistory: orderHistoryReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 });
 
 export default reducer;
