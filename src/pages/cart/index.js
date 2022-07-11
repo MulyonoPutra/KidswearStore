@@ -15,19 +15,21 @@ const Cart = () => {
 
   const { id: productId } = params;
 
-  const { search } = useLocation();
+  const { search, state } = useLocation();
   const qtyInUrl = new URLSearchParams(search).get('qty');
   const qty = qtyInUrl ? Number(qtyInUrl) : 1;
 
   const cart = useSelector((state) => state.cart);
 
+  const { size } = state;
+
   const { cartItems } = cart;
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty));
+      dispatch(addToCart(productId, qty, size));
     }
-  }, [dispatch, productId, qty]);
+  }, [dispatch, productId, qty, size]);
 
   const totalPrice = () => {
     return cartItems.reduce((total, item) => total + item.price * item.qty, 0);
@@ -68,7 +70,7 @@ const Cart = () => {
                   </div>
                   <div className='flex flex-col justify-between ml-4 flex-grow'>
                     <span className='font-bold text-sm'>{item.name}</span>
-                    <span className='text-red-500 text-xs'>{item.name}</span>
+                    <span className='text-red-500 text-xs'>{item.size}</span>
                     <button
                       type='button'
                       className='text-remove'

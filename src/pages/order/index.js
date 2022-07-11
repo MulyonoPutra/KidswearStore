@@ -54,6 +54,7 @@ const Order = () => {
         qty: item.qty,
         itemsPrice: item.itemsPrice,
         shippingAddress: item.shippingAddress,
+        size: item.size,
       });
     });
   }, [items.shippingAddress, order?.orderItems]);
@@ -121,10 +122,10 @@ const Order = () => {
                   </h3>
                   <div className='flex justify-start items-start flex-col space-y-2'>
                     <p className='text-sm leading-none text-gray-800'>
-                      <span className='text-gray-300'>Size: </span> Small
+                      <span className='text-gray-300'>Size: </span> {items.size}
                     </p>
                     <p className='text-sm leading-none text-gray-800'>
-                      <span className='text-gray-300'>Color: </span> Light Blue
+                      <span className='text-gray-300'>Color: </span> -
                     </p>
                   </div>
                 </div>

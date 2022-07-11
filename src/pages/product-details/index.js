@@ -12,7 +12,6 @@ import PlusIcon from 'assets/icons/plus.svg';
 import './product-details.scss';
 
 const ProductDetails = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,8 +19,8 @@ const ProductDetails = () => {
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
-  
-  const [qty, setQty] = useState(1);  
+
+  const [qty, setQty] = useState(1);
   const [isHidden, setIsHidden] = useState(true);
   const [selectedSize, setSelectedSize] = useState('');
 
@@ -48,7 +47,9 @@ const ProductDetails = () => {
   };
 
   const addToCartHandler = () => {
-    navigate(`/cart/${productId}?qty=${qty}`);
+    navigate(`/cart/${productId}?qty=${qty}`, {
+      state: { size: selectedSize },
+    });
   };
 
   const selected = (e) => {
@@ -73,9 +74,7 @@ const ProductDetails = () => {
                 />
                 <div className='flex justify-center ml-3'>
                   <div className='card'>
-                    <h5 className='product-name'>
-                      {product.name}
-                    </h5>
+                    <h5 className='product-name'>{product.name}</h5>
 
                     <div className='flex mb-4'>
                       <Rating
@@ -84,13 +83,9 @@ const ProductDetails = () => {
                         className='flex items-center'
                       ></Rating>
                     </div>
-                    <p className='product-description'>
-                      {product.description}
-                    </p>
+                    <p className='product-description'>{product.description}</p>
                     <Divider />
-                    <p className='product-stock'>
-                      {quantityStock()}
-                    </p>
+                    <p className='product-stock'>{quantityStock()}</p>
                     <span className='text-price'>
                       <NumberFormat
                         value={product.price}
@@ -189,9 +184,7 @@ const ProductDetails = () => {
                         />
                       </div>
                       <div>
-                        <p className='product-notes'>
-                          Add Notes
-                        </p>
+                        <p className='product-notes'>Add Notes</p>
                       </div>
                     </div>
                     {!isHidden && (

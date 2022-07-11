@@ -6,7 +6,7 @@ import {
   CART_SAVE_PAYMENT_METHOD,
 } from '../../constants/cart.constant';
 
-export const addToCart = (productId, qty) => async (dispatch, getState) => {
+export const addToCart = (productId, qty, size) => async (dispatch, getState) => {
   const { data } = await Axios.get(`/v1/product/${productId}`);
   const { product } = data;
   dispatch({
@@ -17,6 +17,7 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
       price: product.price,
       countInStock: product.countInStock,
       product: product._id,
+      size: size,
       qty,
     },
   });

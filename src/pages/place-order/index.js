@@ -40,6 +40,7 @@ const PlaceOrder = () => {
         numReviews: item.numReviews,
         countInStock: item.countInStock,
         qty: item.qty,
+        size: item.size,
       });
     });
   }, [cartItems]);
@@ -101,10 +102,10 @@ const PlaceOrder = () => {
                       Minimal Design
                     </p>
                     <p className='text-sm leading-none text-gray-800'>
-                      <span className='text-gray-300'>Size: </span> Small
+                      <span className='text-gray-300'>Size: </span> {items.size}
                     </p>
                     <p className='text-sm leading-none text-gray-800'>
-                      <span className='text-gray-300'>Color: </span> Light Blue
+                      <span className='text-gray-300'>Color: </span> -
                     </p>
                   </div>
                 </div>
