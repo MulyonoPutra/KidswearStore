@@ -5,7 +5,10 @@ import { useSelector } from 'react-redux';
 import NumberFormat from 'react-number-format';
 
 import './cart.scss';
-import { addToCart, removeFromCart } from '../../config/redux/action/cart.action';
+import {
+  addToCart,
+  removeFromCart,
+} from '../../config/redux/action/cart.action';
 import { ReactComponent as BackIcon } from '../../assets/icons/back.svg';
 
 const Cart = () => {
@@ -70,7 +73,11 @@ const Cart = () => {
                   </div>
                   <div className='flex flex-col justify-between ml-4 flex-grow'>
                     <span className='font-bold text-sm'>{item.name}</span>
-                    <span className='text-red-500 text-xs'>{item.size}</span>
+                    <p className='text-sm leading-none text-gray-800'>
+                      <span className='text-gray-300'>Size: </span>
+                      <span className='text-red-500 text-xs'>{item.size}</span>
+                    </p>
+
                     <button
                       type='button'
                       className='text-remove'

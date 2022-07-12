@@ -65,3 +65,13 @@ section {
     @apply rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10;
   }
 }
+
+.stock {
+  &-in {
+    @apply leading-relaxed text-green-600;
+  }
+
+  &-off {
+    @apply leading-relaxed text-red-600;
+  }
+}

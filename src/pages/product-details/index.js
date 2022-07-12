@@ -40,9 +40,9 @@ const ProductDetails = () => {
 
   const quantityStock = () => {
     if (product.countInStock > 0) {
-      return <span className='leading-relaxed text-green-600'>In Stock</span>;
+      return <span className='stock-in'>In Stock</span>;
     } else {
-      return <span className='leading-relaxed text-red-600'>Out of Stock</span>;
+      return <span className='stock-off'>Out of Stock</span>;
     }
   };
 
