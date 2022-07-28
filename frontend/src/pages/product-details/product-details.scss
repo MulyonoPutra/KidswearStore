@@ -1,0 +1,77 @@
+.images {
+  @apply lg:w-1/2 w-full object-cover object-center rounded border border-gray-200;
+}
+
+.cart-button {
+  @apply flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded w-full text-center justify-center;
+}
+
+.text {
+  &-price {
+    @apply text-2xl text-gray-900 font-bold;
+  }
+}
+
+section {
+  @apply text-gray-700 overflow-hidden bg-white;
+}
+
+.card {
+  width: 500px;
+  max-height: 600px;
+  @apply block p-6 rounded-lg shadow-lg bg-white max-w-sm;
+}
+
+.count {
+  &-plus {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-l-0 w-7 h-10 flex items-center justify-center pb-1 rounded-r-lg;
+  }
+
+  &-minus {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer border border-gray-300 border-r-0 w-7 h-10 flex items-center justify-center pb-1 rounded-l-lg;
+  }
+}
+
+.product {
+  &-images {
+    @apply lg:w-1/2 w-full object-cover object-center rounded border border-gray-200;
+  }
+
+  &-name {
+    @apply text-gray-900 text-xl leading-tight font-medium mb-2;
+  }
+
+  &-stock {
+    @apply leading-relaxed text-green-600;
+  }
+
+  &-description {
+    @apply leading-relaxed text-gray-300;
+  }
+
+  &-notes {
+    @apply leading-relaxed text-green-600 text-sm mb-2;
+  }
+
+  &-text-area {
+    @apply shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md;
+  }
+
+  &-input {
+    @apply border border-gray-300 text-center w-14 pb-1 h-10;
+  }
+
+  &-dropdown {
+    @apply rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10;
+  }
+}
+
+.stock {
+  &-in {
+    @apply leading-relaxed text-green-600;
+  }
+
+  &-off {
+    @apply leading-relaxed text-red-600;
+  }
+}

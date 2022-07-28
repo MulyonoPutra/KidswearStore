@@ -1,0 +1,71 @@
+#summary {
+    background-color: #f6f6f6;
+}
+
+.checkout-btn {
+    @apply bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full;
+}
+
+.btn {
+    &-checkout {
+        @apply bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full;
+    }
+    &-apply {
+        @apply bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase;
+    }
+
+    &-remove {
+        @apply font-semibold hover:text-red-500 text-gray-500 text-xs;
+    }
+
+    &-back {
+        @apply flex font-semibold text-indigo-600 text-sm mt-10;
+    }
+}
+
+.text {
+    &-total-cost {
+        @apply flex font-semibold justify-between py-6 text-sm uppercase;
+    }
+
+    &-promo {
+        @apply font-semibold inline-block mb-3 text-sm uppercase
+    }
+
+    &-row-label {
+        width: 27%;
+        @apply font-semibold text-center text-gray-600 text-xs uppercase;
+    }
+
+    &-product-details {
+        width: 28%;
+        @apply font-semibold text-gray-600 text-xs uppercase
+    }
+
+    &-title {
+        @apply font-semibold text-2xl
+    }
+
+    &-remove {
+        @apply font-semibold hover:text-red-500 text-gray-500 text-xs grid justify-items-start;
+    }
+
+    &-value {
+        width: 23%;
+        @apply text-center font-semibold text-sm;
+    }
+
+    &-label {
+        @apply font-medium inline-block mb-3 text-sm uppercase
+    }
+
+    &-order-summary {
+        @apply text-title border-b pb-8;
+    }
+}
+
+.card {
+    &-order-summary {
+        @apply flex items-center hover:bg-gray-100 -mx-8 px-6 py-5;
+    }
+}

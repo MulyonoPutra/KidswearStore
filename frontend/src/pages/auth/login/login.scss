@@ -1,0 +1,17 @@
+.wrapper {
+    @apply min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8
+}
+
+.sign-in-text {
+    @apply mt-6 text-center text-3xl font-extrabold text-gray-900;
+}
+
+.checkbox {
+    @apply h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded;
+}
+
+.text {
+    &-forgot-password {
+        @apply font-medium text-indigo-600 hover:text-indigo-500;
+    }
+}

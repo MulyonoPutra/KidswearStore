@@ -1,0 +1,137 @@
+.wrapper {
+    @apply flex flex-col xl:flex-row justify-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0;
+
+    &.order-items {
+        &-wrapper {
+            @apply flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8;
+        }
+    
+        &-card {
+            @apply flex flex-col justify-start items-start bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full;
+        }
+    
+        &-card-item {
+            @apply mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full
+        }
+    
+        &-text {
+            @apply text-lg md:text-xl font-semibold leading-6 xl:leading-5 text-gray-800;
+        }
+        &-text-lg {
+            @apply text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9  text-gray-800;
+        }
+    }
+
+    .card-list {
+        @apply border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0;
+
+        &-wrapper {
+            @apply w-full flex flex-col justify-start items-start space-y-8;
+        }
+
+        &-name {
+            @apply text-xl xl:text-2xl font-semibold leading-6 text-gray-800;
+        }
+    }
+
+    .summary {
+        @apply flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8;
+        
+        &-wrapper {
+            @apply flex flex-col px-4 py-6 md:p-6 xl:p-8 w-full bg-gray-50 space-y-6;
+        }
+
+        &-title {
+            @apply text-xl font-semibold leading-5 text-gray-800;
+        }
+
+        &-card {
+            @apply flex justify-center items-center w-full space-y-4 flex-col border-gray-200 border-b pb-4;
+        }
+
+        &-text {
+            &-normal {
+                @apply text-base leading-4 text-gray-800;
+            }
+
+            &-sm {
+                @apply text-base leading-4 text-gray-600;
+            }
+
+            &-bold {
+                &-normal {
+                    @apply text-base leading-4 text-gray-800 font-semibold;
+                }
+    
+                &-sm {
+                    @apply text-base leading-4 text-gray-600 font-semibold;
+                }
+            }
+        }
+    }
+
+    .customer {
+        @apply bg-gray-50 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col;
+       
+        &-title {
+            @apply text-xl font-semibold leading-5 text-red-800;
+        }
+
+        &-wrapper {
+            @apply flex flex-col md:flex-row xl:flex-col justify-start items-stretch  w-full md:space-x-6 lg:space-x-8 xl:space-x-0;
+        }
+
+        &-list {
+            @apply flex flex-col justify-start items-start flex-shrink-0;
+
+            &-wrapper {
+                @apply flex justify-center w-full md:justify-start items-center space-x-4 py-8 border-b border-gray-200;
+            }
+        }
+
+        &-name {
+            @apply flex justify-start items-start flex-col space-y-2;
+
+            &-text {
+                @apply text-base font-semibold leading-4 text-left text-gray-800;
+            }
+        }
+
+        &-logo {
+            @apply flex justify-center  md:justify-start items-center space-x-4 py-4 border-b border-gray-200 w-full;
+        }
+    }
+
+    .shipping {
+        @apply flex justify-between xl:h-full  items-stretch w-full flex-col mt-6 md:mt-0;
+
+        &-wrapper {
+            @apply flex justify-center md:justify-start xl:flex-col flex-col md:space-x-6 lg:space-x-8 xl:space-x-0 space-y-4 xl:space-y-12 md:space-y-0 md:flex-row items-center md:items-start;
+        }
+
+        &-address {
+            @apply flex justify-center md:justify-start  items-center md:items-start flex-col space-y-4 xl:mt-8;
+
+            &-title {
+                @apply text-base font-semibold leading-4 text-center md:text-left text-gray-800;
+            }
+
+            &-value {
+                @apply w-48 lg:w-full xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600;
+            }
+        }
+    }
+
+    .place-order {
+        &-wrapper {
+            @apply flex w-full justify-center items-center md:justify-start md:items-start mt-12;
+        }
+
+        &-btn {
+            @apply md:mt-0 py-5 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-800 border border-white font-medium w-full 2xl:w-full text-base leading-4 text-white;
+        }
+        
+    }
+
+}
+
